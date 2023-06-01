@@ -1981,6 +1981,10 @@ body {
 }
 
 
+.ps-st {
+    position: static !important;
+}
+
 @media (max-width: 320px) {
     .offer-btn {
         padding-right: 20px;

@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- end header-top-bar -->
-    <div class="header-menu-wrapper bg-pr padding-right-30px padding-left-30px">
+    <div class="header-menu-wrapper ps-st bg-pr padding-right-30px padding-left-30px">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
