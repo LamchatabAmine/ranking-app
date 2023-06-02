@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StaticController::class, 'home'])->name('home-page');
 Route::get('/about', [StaticController::class, 'about'])->name('about-page');
+Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page')->middleware(['auth', 'IsAdmin']);;
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
+
+
+
 Route::get('/login', [StaticController::class, 'login'])->name('login-page');
 Route::get('/register', [StaticController::class, 'register'])->name('register-page');
 

@@ -71,9 +71,6 @@
                             <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
                                 <i class="la la-plus mr-2"></i>Add Listing
                             </a>
-                            {{-- <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
-                                <i class="la la-plus mr-2"></i>Add Listing
-                            </a> --}}
                         </div><!-- end nav-right-content -->
                     </div><!-- end menu-full-width -->
                 </div><!-- end col-lg-12 -->

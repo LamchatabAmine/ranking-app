@@ -21,10 +21,14 @@ class StaticController extends Controller
     }
     public function login()
     {
-        return view('app.login');
+        return view('auth.login');
     }
     public function register()
     {
-        return view('app.register');
+        return view('auth.register');
+    }
+    public function listing()
+    {
+        return view('app.listing');
     }
 }
