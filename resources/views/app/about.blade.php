@@ -28,6 +28,9 @@
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->
         </div><!-- end container -->
+        <div class="bread-svg">
+            <x-svgs.svg-item />
+        </div><!-- end bread-svg -->
     </section>
 
     {{--  BLOG AREA --}}

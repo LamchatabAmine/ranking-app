@@ -11,4 +11,13 @@
     <li>
         <a href="{{ route('contact-page') }}">Contact</a>
     </li>
+    @if (Route::has('login'))
+        @auth
+            <li>
+                <a href="{{ route('profile.edit') }}">
+                    {{ __('My_account') }}
+                </a>
+            </li>
+        @endauth
+    @endif
 </ul>

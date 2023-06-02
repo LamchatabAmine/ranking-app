@@ -1,5 +1,5 @@
 <x-app-layout>
-    <!-- end header-top-bar -->
+
     <div class="header-menu-wrapper ps-st bg-pr padding-right-30px padding-left-30px">
         <div class="container-fluid">
             <div class="row">
@@ -27,12 +27,10 @@
                             </nav>
                         </div><!-- end main-menu-content -->
                         <div class="nav-right-content">
-                            <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
+                            <a href="{{ route('addListing-page') }}"
+                                class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
                                 <i class="la la-plus mr-2"></i>Add Listing
                             </a>
-                            {{-- <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
-                                <i class="la la-plus mr-2"></i>Add Listing
-                            </a> --}}
                         </div><!-- end nav-right-content -->
                     </div><!-- end menu-full-width -->
                 </div><!-- end col-lg-12 -->
@@ -51,27 +49,40 @@
                             <!-- Full Name input -->
                             <div class="form-outline mb-4 mt-4">
                                 <label class="form-label  d-flex" for="Full-Name">Full Name</label>
-                                <input type="text" id="full-Name" name="fullName" class="form-control" />
+                                <input type="text" id="full-Name" name="fullName" class="form-control"
+                                    value="{{ old('fullName') }}" />
+                                @error('fullName')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <!-- Email input -->
                             <div class="form-outline mb-4 ">
                                 <label class="form-label  d-flex" for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" />
+                                <input type="email" id="email" name="email" class="form-control"
+                                    value="{{ old('email') }}" />
+                                @error('email')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <!-- Password input -->
                             <div class="form-outline mb-4 ">
                                 <label class="form-label d-flex" for="password">Password</label>
-                                <input type="password" id="password" name="password" class="form-control" />
+                                <input type="password" id="password" name="password" class="form-control"
+                                    value="{{ old('password') }}" />
+                                @error('password')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <!-- Repeat Password input -->
                             <div class="form-outline mb-4 ">
-                                <label class="form-label d-flex" for="RepeatPassword">Repeat password</label>
-                                <input type="password" id="RepeatPassword" name="repeatPassword" class="form-control" />
+                                <label class="form-label d-flex" for="password_confirmation">Repeat password</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation"
+                                    class="form-control" />
                             </div>
                             <button type="submit" class="btn btn-lg theme-btn-primary btn-block mx-auto">Sign
                                 Up</button>
                             <div class="mt-3">Already have an account?
-                                <a href="{{ route('login-page') }}">Sign in</a>
+                                <a href="{{ route('login') }}">Sign in</a>
                             </div>
                             <hr class="my-4">
                             <button class=" btn-lg btn-block  btn-google" type="submit">

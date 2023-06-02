@@ -27,7 +27,8 @@
                             </nav>
                         </div><!-- end main-menu-content -->
                         <div class="nav-right-content">
-                            <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
+                            <a href="{{ route('addListing-page') }}"
+                                class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
                                 <i class="la la-plus mr-2"></i>Add Listing
                             </a>
                             {{-- <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
@@ -50,20 +51,28 @@
                             <h3 class="mb-5">Sign in</h3>
                             <div class="form-outline mb-4">
                                 <label class="form-label  d-flex" for="email">Email</label>
-                                <input type="email" id="email" class="form-control form-control-lg" />
+                                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                    class="form-control form-control-lg" />
+                                @error('email')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-outline mb-4">
-                                <label class="form-label  d-flex" for="typePasswordX-2">Password</label>
-                                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                                <label class="form-label  d-flex" for="password">Password</label>
+                                <input type="password" id="password" name="password"
+                                    class="form-control form-control-lg" />
+                                @error('email')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <!-- Checkbox -->
                             <div class="form-check d-flex justify-content-start mb-4">
-                                <label class="form-check-label" for="form1Example3"> Remember password </label>
-                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                                <label class="form-check-label" for="checkbox"> Remember password </label>
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox" />
                             </div>
                             <button type="submit" class="btn btn-lg theme-btn-primary btn-block mx-auto">Login</button>
                             <div class="mt-2">Not registered?
-                                <a href="{{ route('register-page') }}">Register for free.</a>
+                                <a href="{{ route('register') }}">Register for free.</a>
                             </div>
                             <hr class="my-4">
                             <button class=" btn-lg btn-block  btn-google" type="submit">

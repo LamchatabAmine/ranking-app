@@ -31,4 +31,8 @@ class StaticController extends Controller
     {
         return view('app.listing');
     }
+    public function addListing()
+    {
+        return view('app.add-listing');
+    }
 }

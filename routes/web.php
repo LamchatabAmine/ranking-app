@@ -17,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StaticController::class, 'home'])->name('home-page');
 Route::get('/about', [StaticController::class, 'about'])->name('about-page');
-Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page')->middleware(['auth', 'IsAdmin']);;
+Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page');
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
+Route::get('/addListing', [StaticController::class, 'addListing'])->name('addListing-page')->middleware(['auth', 'IsConsumer']);
 
 
 
-Route::get('/login', [StaticController::class, 'login'])->name('login-page');
-Route::get('/register', [StaticController::class, 'register'])->name('register-page');
+// Route::get('/login', [StaticController::class, 'login'])->name('login-page');
+// Route::get('/register', [StaticController::class, 'register'])->name('register-page');
 
 
 
@@ -31,10 +32,10 @@ Route::get('/register', [StaticController::class, 'register'])->name('register-p
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-// require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

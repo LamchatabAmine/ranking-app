@@ -3,6 +3,14 @@
     {{--  HEADER AREA --}}
     <x-header />
 
+    <!--  per-loader -->
+    <div class="loader-container">
+        <div class="loader-ripple">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
     <section class="breadcrumb-area bread-bg bread-overlay overflow-hidden">
         <div class="overlay"></div><!-- end overlay -->
         <div class="container">
@@ -13,8 +21,7 @@
                             <h2 class="sec__title text-white font-size-40 mb-0">Listing List</h2>
                         </div>
                         <ul class="list-items bread-list">
-                            <li><a href="index-2.html">Home</a></li>
-                            <li>Listings</li>
+                            <li><a href="{{ route('home-page') }}">Home</a></li>
                             <li>Listing List</li>
                         </ul>
                     </div><!-- end breadcrumb-content -->
@@ -22,21 +29,7 @@
             </div><!-- end row -->
         </div><!-- end container -->
         <div class="bread-svg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="50px" viewBox="0 0 1200 150"
-                preserveAspectRatio="none">
-                <g>
-                    <path fill-opacity="0.2"
-                        d="M0,150 C600,100 1000,50 1200,-1.13686838e-13 C1200,6.8027294 1200,56.8027294 1200,150 L0,150 Z">
-                    </path>
-                </g>
-                <g class="pix-waiting animated" data-anim-type="fade-in-up" data-anim-delay="300">
-                    <path fill="rgba(255,255,255,0.8)"
-                        d="M0,150 C600,120 1000,80 1200,30 C1200,36.8027294 1200,76.8027294 1200,150 L0,150 Z"></path>
-                </g>
-                <path fill="#fff"
-                    d="M0,150 C600,136.666667 1000,106.666667 1200,60 C1200,74 1200,104 1200,150 L0,150 Z"></path>
-                <defs></defs>
-            </svg>
+            <x-svgs.svg-item />
         </div><!-- end bread-svg -->
     </section><!-- end breadcrumb-area -->
 
@@ -65,546 +58,33 @@
                                     <option value="all-listings">Random</option>
                                 </select>
                             </div>
-                            <ul class="filter-nav ml-1">
-                                <li><a href="listing-grid.html" data-toggle="tooltip" data-placement="top"
-                                        title="Grid View"><span class="la la-th-large"></span></a></li>
-                                <li><a href="listing-list.html" data-toggle="tooltip" data-placement="top"
-                                        title="List View" class="active"><span class="la la-list"></span></a></li>
-                            </ul>
                         </div><!-- end filter-bar-action -->
                     </div><!-- end filter-bar -->
                 </div><!-- end col-lg-12 -->
                 <div class="col-lg-8">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img4.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">now open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/listing-logo.jpg" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Favorite Place Food Bank</a>
-                                        <i class="la la-check-circle ml-1" data-toggle="tooltip" data-placement="top"
-                                            title="Claimed"></i>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Pricey">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-cutlery mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Restaurant</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img5.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge bg-10">closed</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/listing-logo2.jpg" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Beach Blue Boardwalk</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Moderate">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-plane mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Travel</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img6.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">Now Open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/listing-logo3.jpg" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Hotel Govendor</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Inexpensive">
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-hotel mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Hotels</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img7.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">now open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/anywhere.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Sticky band party</a>
-                                        <i class="la la-check-circle ml-1" data-toggle="tooltip" data-placement="top"
-                                            title="Claimed"></i>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Pricey">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-music mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Event</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img8.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge bg-10">closed</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/sketch.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Sena clothing shopping mall</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Ultra High">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-shopping-cart mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Shop</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img9.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">Now open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/fill-sign.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Hotel Govendor</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Inexpensive">
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-hotel mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Hotels</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img6.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">Now Open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/listing-logo3.jpg" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Hotel Govendor</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Inexpensive">
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-hotel mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Hotels</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img7.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">now open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/anywhere.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Sticky band party</a>
-                                        <i class="la la-check-circle ml-1" data-toggle="tooltip" data-placement="top"
-                                            title="Claimed"></i>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Pricey">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-music mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Event</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img8.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge bg-10">closed</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/sketch.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Sena clothing shopping mall</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Ultra High">
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-shopping-cart mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Shop</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
-                        <div class="col-lg-12">
-                            <div class="card-item card-item-list">
-                                <div class="card-image">
-                                    <a href="listing-details.html" class="d-block">
-                                        <img src="images/img-loading.html" data-src="images/img9.jpg"
-                                            class="card__img lazy" alt="">
-                                        <span class="badge">Now open</span>
-                                    </a>
-                                    <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
-                                        title="Save">
-                                        <i class="la la-bookmark"></i>
-                                    </span>
-                                </div>
-                                <div class="card-content">
-                                    <a href="#" class="user-thumb d-inline-block" data-toggle="tooltip"
-                                        data-placement="top" title="TechyDevs">
-                                        <img src="images/fill-sign.png" alt="author-img">
-                                    </a>
-                                    <h4 class="card-title pt-3">
-                                        <a href="listing-details.html">Hotel Govendor</a>
-                                    </h4>
-                                    <p class="card-sub"><a href="#"><i
-                                                class="la la-map-marker mr-1 text-color-2"></i>Bishop Avenue, New
-                                            York</a></p>
-                                    <ul class="listing-meta d-flex align-items-center">
-                                        <li class="d-flex align-items-center">
-                                            <span class="rate flex-shrink-0">4.7</span>
-                                            <span class="rate-text">5 Ratings</span>
-                                        </li>
-                                        <li>
-                                            <span class="price-range" data-toggle="tooltip" data-placement="top"
-                                                title="Inexpensive">
-                                                <strong class="font-weight-medium">$</strong>
-                                            </span>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <i class="la la-hotel mr-1 listing-icon"></i><a href="#"
-                                                class="listing-cat-link">Hotels</a>
-                                        </li>
-                                    </ul>
-                                    <ul class="info-list padding-top-20px">
-                                        <li><span class="la la-link icon"></span>
-                                            <a href="#"> www.techydevs.com</a>
-                                        </li>
-                                        <li><span class="la la-calendar-check-o icon"></span>
-                                            Opened 1 month ago
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- end card-item -->
-                        </div><!-- end col-lg-12 -->
+
+                        @for ($i = 0; $i < 10; $i++)
+                            <div class="col-lg-12">
+                                <x-card-list>
+                                    <x-slot:linkItem>#linkItem</x-slot>
+                                        <x-slot:image_business>img4.jpg</x-slot>
+                                            <x-slot:linkProfile>#linkProfile</x-slot>
+                                                <x-slot:logo>listing-logo.png</x-slot>
+                                                    <x-slot:title>Favorite Place Food Bank</x-slot>
+                                                        <x-slot:linkAddress>#linkAddress</x-slot>
+                                                            <x-slot:address>Bishop Avenue, New York</x-slot>
+                                                                <x-slot:rate>4.7</x-slot>
+                                                                    <x-slot:linkCategory>#linkCategory</x-slot>
+                                                                        <x-slot:category>Restaurant</x-slot>
+                                                                            <x-slot:linkWebSite>#linkWebSite</x-slot>
+                                                                                <x-slot:webSite>www.techydevs.com
+                                                                                    </x-slot>
+                                                                                    <x-slot:create_at>Opened 1 month ago
+                                                                                        </x-slot>
+                                </x-card-list>
+                            </div>
+                        @endfor
                     </div><!-- end row -->
                     <div class="row">
                         <div class="col-lg-12 pt-3 text-center">
@@ -652,8 +132,7 @@
                             <form action="#" class="form-box">
                                 <div class="form-group">
                                     <span class="la la-search form-icon"></span>
-                                    <input class="form-control" type="search"
-                                        placeholder="What are you looking for?">
+                                    <input class="form-control" type="search" placeholder="What are you looking for?">
                                 </div>
                                 <div class="form-group user-chosen-select-container">
                                     <select class="user-chosen-select">
@@ -922,8 +401,6 @@
                                     </select>
                                 </div><!-- end form-group -->
                                 <div class="btn-box">
-                                    <a href="#" class="btn-gray btn-gray-lg open-filter-btn w-100"><i
-                                            class="la la-clock mr-2"></i>Now Open</a>
                                     <button type="submit" class="theme-btn gradient-btn border-0 w-100 mt-3">
                                         <i class="la la-search mr-2"></i>Search Now
                                     </button>
@@ -1080,8 +557,7 @@
                                 <a class="collapse-btn" data-toggle="collapse" href="#showMoreOptionCollapse3"
                                     role="button" aria-expanded="false" aria-controls="showMoreOptionCollapse3">
                                     <span class="collapse-btn-hide">Show More <i class="la la-plus ml-1"></i></span>
-                                    <span class="collapse-btn-show">Show Less <i
-                                            class="la la-minus ml-1"></i></span>
+                                    <span class="collapse-btn-show">Show Less <i class="la la-minus ml-1"></i></span>
                                 </a>
                             </div>
                         </div><!-- end sidebar-widget -->
@@ -1157,8 +633,7 @@
                                 <a class="collapse-btn" data-toggle="collapse" href="#showMoreOptionCollapse2"
                                     role="button" aria-expanded="false" aria-controls="showMoreOptionCollapse2">
                                     <span class="collapse-btn-hide">Show More <i class="la la-plus ml-1"></i></span>
-                                    <span class="collapse-btn-show">Show Less <i
-                                            class="la la-minus ml-1"></i></span>
+                                    <span class="collapse-btn-show">Show Less <i class="la la-minus ml-1"></i></span>
                                 </a>
                             </div>
                         </div><!-- end sidebar-widget -->

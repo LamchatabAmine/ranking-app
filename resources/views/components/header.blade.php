@@ -17,15 +17,33 @@
                 </div>
                 {{-- login and signUp --}}
                 <div class="col d-flex justify-content-end align-items-center header-top-info font-size-14">
-                    <p class="login-and-signup-wrap">
-                        <a href="{{ route('login-page') }}">
-                            <span class="mr-1 la la-sign-in"></span>Login
-                        </a>
-                        <span class="or-text px-2">|</span>
-                        <a href="{{ route('register-page') }}">
-                            <span class="mr-1 la la-user-plus"></span>Sign Up
-                        </a>
-                    </p>
+                    @if (Route::has('login'))
+                        @auth
+                            <!-- Authentication -->
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                            </li>
+                        @else
+                            <p class="login-and-signup-wrap">
+                                <a href="{{ route('login') }}">
+                                    <span class="mr-1 la la-sign-in"></span>Login
+                                </a>
+                                @if (Route::has('register'))
+                                    <span class="or-text px-2">|</span>
+                                    <a href="{{ route('register') }}">
+                                        <span class="mr-1 la la-user-plus"></span>Sign Up
+                                    </a>
+                                @endif
+                            </p>
+                        @endauth
+                    @endif
                 </div>
             </div>
             <!-- end row -->
@@ -54,27 +72,20 @@
                                 </div><!-- end menu-toggle -->
                             </div>
                         </div><!-- end logo -->
-                        <div class="quick-search-form d-flex align-items-center">
-                            <form action="#" class="w-100">
-                                <div class="header-search position-relative">
-                                    <i class="la la-search form-icon"></i>
-                                    <input type="search" name="" placeholder="What are you looking for?">
-                                </div>
-                            </form>
-                        </div><!-- end quick-search-form -->
                         <div class="main-menu-content ml-auto">
                             <nav class="main-menu">
                                 <x-navigation-link />
                             </nav>
                         </div><!-- end main-menu-content -->
                         <div class="nav-right-content">
-                            <a href="add-listing.html" class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
+                            <a href="{{ route('addListing-page') }}"
+                                class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
                                 <i class="la la-plus mr-2"></i>Add Listing
                             </a>
-                        </div><!-- end nav-right-content -->
-                    </div><!-- end menu-full-width -->
-                </div><!-- end col-lg-12 -->
-            </div><!-- end row -->
-        </div><!-- end container-fluid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div><!-- end header-menu-wrapper -->
 </header>
