@@ -78,7 +78,7 @@
                             </nav>
                         </div><!-- end main-menu-content -->
                         <div class="nav-right-content">
-                            <a href="{{ route('addListing-page') }}"
+                            <a href="{{ route('business.index') }}"
                                 class="theme-btn gradient-btn shadow-none add-listing-btn-hide">
                                 <i class="la la-plus mr-2"></i>Add Listing
                             </a>

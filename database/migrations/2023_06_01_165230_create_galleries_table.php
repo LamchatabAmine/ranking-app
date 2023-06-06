@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('business_id')->unsigned();
             $table->text('path');
-            $table->string('type');
+            $table->string('type')->default(0);
             $table->timestamps();
             $table->foreign('business_id')->references('id')->on('businesses')->onDelete('CASCADE');
         });

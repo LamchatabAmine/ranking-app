@@ -30,18 +30,9 @@
                             <h2 class="sec__title cd-headline slide">
                                 What are you interested in
                                 <span class="cd-words-wrapper py-0">
-                                    <b class="is-visible">Hotels</b>
-                                    <b>Restaurants</b>
-                                    <b>Hotels</b>
-                                    <b>Health & Fitness</b>
-                                    <b>Beauty & Wellness</b>
-                                    <b>Automotive</b>
-                                    <b>Technology & Electronic</b>
-                                    <b>Home & Garden</b>
-                                    <b>Travel & Tourism </b>
-                                    <b>Sport</b>
-                                    <b>Pet Services</b>
-                                    <b>Art & Culture</b>
+                                    @foreach ($categories->where('parent_category_id', null) as $key => $category)
+                                        <b {{ $key == 0 ? 'class=is-visible' : '' }}>{{ $category->category_name }}</b>
+                                    @endforeach
                                 </span>
                             </h2>
                             <p class="sec__desc">
@@ -57,9 +48,18 @@
                                     <input class="form-control" type="search" placeholder="What are you looking for?">
                                 </div>
                             </form>
-                        </div><!-- end main-search-input-item -->
+                        </div>
                         <div class="main-search-input-item user-chosen-select-container">
-                            <select class="user-chosen-select">
+                            <select name="city" class="user-chosen-select">
+                                <option value="">Select a City</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">
+                                        {{ $city->parent_city ? $city->parent_city->city_name . ' > ' : '' }}
+                                        {{ $city->city_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            {{-- <select class="user-chosen-select">
                                 <option value="0">Select a Country</option>
                                 <option value="AF">Afghanistan</option>
                                 <option value="AX">Åland Islands</option>
@@ -298,25 +298,23 @@
                                 <option value="YE">Yemen</option>
                                 <option value="ZM">Zambia</option>
                                 <option value="ZW">Zimbabwe</option>
-                            </select>
-                        </div><!-- end main-search-input-item -->
+                            </select> --}}
+                        </div>
                         <div class="main-search-input-item user-chosen-select-container">
-                            <select class="user-chosen-select">
-                                <option value="0">Select a Category</option>
-                                <option value="1">Shops</option>
-                                <option value="2">Hotels</option>
-                                <option value="3">Foods & Restaurants</option>
-                                <option value="4">Fitness</option>
-                                <option value="5">Travel</option>
-                                <option value="6">Salons</option>
-                                <option value="7">Event</option>
-                                <option value="8">Business</option>
+                            <select name="category" class="user-chosen-select">
+                                <option value="">Select a category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->parent_category ? $category->parent_category->category_name . ' > ' : '' }}
+                                        {{ $category->category_name }}
+                                    </option>
+                                @endforeach
                             </select>
-                        </div><!-- end main-search-input-item -->
+                        </div>
                         <div class="main-search-input-item">
                             <button class="theme-btn gradient-btn border-0 w-100" type="submit"><i
                                     class="la la-search mr-2"></i>Search Now</button>
-                        </div><!-- end main-search-input-item -->
+                        </div>
                     </div><!-- end main-search-input -->
 
                 </div><!-- end col-lg-12 -->
@@ -348,21 +346,24 @@
             </div>
             <!-- end row -->
             <div class="row mt-5">
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Restaurants
+                @foreach ($categories->where('parent_category_id', null)->slice(0, 5) as $category)
+                    <x-category-item>
+                        <x-slot:imageName>
+                            home-page-img
                             </x-slot>
 
-                            <x-slot:listing>
-                                12 Listings
+                            <x-slot:title>
+                                {{ $category->category_name }}
                                 </x-slot>
-                </x-category-item>
-                {{--  --}}
-                <x-category-item>
+
+                                <x-slot:listing>
+                                    12 Listings
+                                    </x-slot>
+                    </x-category-item>
+                @endforeach
+
+
+                {{-- <x-category-item>
                     <x-slot:imageName>
                         home-page-img
                         </x-slot>
@@ -375,7 +376,7 @@
                                 55 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -389,7 +390,7 @@
                                 44 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -403,7 +404,7 @@
                                 33 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -417,7 +418,7 @@
                                 66 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -431,7 +432,7 @@
                                 33 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -445,7 +446,7 @@
                                 44 Listings
                                 </x-slot>
                 </x-category-item>
-                <!-- end col-lg-3 -->
+
                 <x-category-item>
                     <x-slot:imageName>
                         home-page-img
@@ -458,8 +459,7 @@
                             <x-slot:listing>
                                 11 Listings
                                 </x-slot>
-                </x-category-item>
-                <!-- end col-lg-3 -->
+                </x-category-item> --}}
             </div>
             <!-- end row -->
             <div class="more-btn-box pt-3 text-center">

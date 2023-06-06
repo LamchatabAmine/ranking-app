@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 // use Illuminate\View\View;
+use App\Models\Category;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 // use Illuminate\Support\Facades\View;
@@ -12,8 +14,12 @@ class StaticController extends Controller
 {
     public function home()
     {
-        return view('app.index');
+        $categories = Category::all();
+        $cities = City::all();
+
+        return view('app.index', compact('categories', 'cities'));
     }
+
     public function about()
     {
         return view('app.about');
@@ -34,10 +40,8 @@ class StaticController extends Controller
     {
         return view('app.listing');
     }
-    public function addListing()
-    {
-        return view('app.add-listing');
-    }
+
+
     public function show(Request $request)
     {
         return View::make('profile.user', [

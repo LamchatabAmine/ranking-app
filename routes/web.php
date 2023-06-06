@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,22 @@ Route::get('/', [StaticController::class, 'home'])->name('home-page');
 Route::get('/about', [StaticController::class, 'about'])->name('about-page');
 Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page');
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
-Route::get('/addListing', [StaticController::class, 'addListing'])->name('addListing-page')->middleware(['auth', 'IsConsumer']);
 
 
-Route::get('/myAccount', [StaticController::class, 'show'])->name('myAccount');
+
+// Route::resource('business', BusinessController::class)->middleware(['auth', 'IsConsumer']);
+
+
+Route::middleware(['auth', 'IsConsumer'])->group(function () {
+    Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
+    Route::post('/business', [BusinessController::class, 'store'])->name('business.store');
+});
+
 
 
 
 Route::middleware(['auth', 'IsConsumer'])->group(function () {
+    Route::get('/myAccount', [StaticController::class, 'show'])->name('myAccount');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
