@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('fullName');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('role')->default(2);
             $table->string('password');
+            $table->integer('role')->default(2);
+            $table->string('image')->default('images/userProfile/avatar.svg')->nullable();
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

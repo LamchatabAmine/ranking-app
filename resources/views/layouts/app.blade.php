@@ -43,6 +43,7 @@
     <script src="{{ url('https://kit.fontawesome.com/c7a60e43cd.js') }}" crossorigin="anonymous"></script>
 
     <!-- Template JS Files -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="{{ url('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ url('js/jquery-ui.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>

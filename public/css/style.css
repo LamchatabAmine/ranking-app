@@ -1912,8 +1912,8 @@ body {
 }
 
 .gradient-btn {
-    background: var(--buttons-color);
-    color: #fff;
+    background: var(--buttons-color) !important;
+    color: #fff !important;
     box-shadow: 0 5px 25px rgba(123, 104, 238, 0.3)
 }
 
@@ -2407,6 +2407,275 @@ body {
     color: var(--primary-color);
     margin-bottom: 18px
 }
+
+.pt-9 {
+    padding-top: 9rem !important
+}
+
+
+
+/* ================================== */
+
+
+@media (max-width: 991px) {
+
+    .section-full.p-t120,
+    .section-full.p-b90,
+    .section-full.p-tb120 {
+        padding-top: 38px;
+        padding-bottom: 10px;
+    }
+}
+
+
+.p-t120 {
+    padding-top: 120px;
+}
+
+.p-b90 {
+    padding-bottom: 90px;
+}
+
+
+.site-bg-white {
+    background-color: #fff;
+}
+
+.testimonials-v.site-bg-white {
+    background-color: #fff;
+}
+
+
+
+.m-b30 {
+    margin-bottom: 30px;
+}
+
+
+
+.side-bar-st-1 {
+    background: #d4e6ff;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+
+
+
+/*Edit Profile*/
+.candidate-profile-pic {
+    position: relative;
+    display: block;
+    max-width: 150px;
+    margin: 0px auto 30px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+.candidate-profile-pic img {
+    border-radius: 10px;
+    margin: 10px;
+    display: block;
+    width: 128px;
+}
+
+.candidate-profile-pic .upload-btn-wrapper {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.candidate-profile-pic .upload-btn-wrapper button {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn-wrapper input[type="file"] {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+
+
+.dashboard-profile-photo .upload-btn-wrapper {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+}
+
+.dashboard-profile-photo .upload-btn-wrapper button {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dashboard-profile-photo .upload-btn-wrapper #upload-image-grid img {
+    object-fit: cover;
+    object-position: center;
+    width: 128px;
+    height: 128px;
+    padding: 0px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    border-radius: 10px;
+}
+
+
+.candidate-profile-pic .upload-btn-wrapper {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.candidate-profile-pic .upload-btn-wrapper button {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/*Upload Image File*/
+#upload-image-grid {
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+    border-radius: 10px;
+    top: 30px;
+    position: relative;
+}
+
+#upload-image-grid img {
+    object-fit: cover;
+    object-position: center;
+    width: 128px;
+    height: 128px;
+    padding: 0px;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+    border-radius: 10px;
+}
+
+
+
+.site-bg-gray {
+    background-color: #f9fcff;
+}
+
+.form-control {
+    width: 100%;
+    height: 60px;
+    padding: 20px;
+    padding-left: 20px;
+    border: none;
+    background-color: #f0f6fe;
+    border-radius: 10px;
+}
+
+.ls-inputicon-box .form-control {
+    padding-left: 35px;
+}
+
+.button-sm {
+    padding: 5px 10px !important;
+    font-size: 12px;
+}
+
+.site-button {
+    color: rgba(0, 0, 0, 0) !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 0 0 #fff, 400px 0 0 #fff;
+}
+
+.site-button {
+    outline: none;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-table;
+    background-color: var(--primary-color);
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.5s all ease;
+}
+
+.site-button {
+    color: rgba(0, 0, 0, 0) !important;
+    transition: all 0.3s ease !important;
+    text-shadow: 0 0 0 #fff, 400px 0 0 #fff;
+}
+
+
+
+.site-button:hover {
+    text-shadow: -400px 0 0 #fff, 0 0 0 #fff;
+    background-color: var(--secondary-color);
+}
+
+
+
+
+/* a {
+    color: var();
+    outline: 0px none;
+    text-decoration: none;
+} */
+
+
+.m-b30 {
+    margin-bottom: 30px;
+}
+
+
+
+.right-section-panel .panel.panel-default {
+    border-radius: 10px;
+    /* background: #fff; */
+}
+
+.wt-panel-heading {
+    border-bottom: 1px solid #ddd;
+}
+
+
+.p-a20 {
+    padding: 20px;
+}
+
+
+.m-a0 {
+    margin: 0px;
+}
+
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+
+.ls-inputicon-box {
+    position: relative;
+}
+
+
+/* =================================== */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .section-heading .sec__title br {
@@ -4799,7 +5068,7 @@ div.datedropper .picker .pick-lg-b li {
 }
 
 .user-bread-bg {
-    background-image: url(../images/user-bread-img.jpg)
+    background-image: url(../images/bread-bg2.jpg)
 }
 
 @media (max-width: 480px) {

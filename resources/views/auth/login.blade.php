@@ -46,43 +46,47 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                        <form class="card-body p-5 text-center" method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <h3 class="mb-5">Sign in</h3>
-                            <div class="form-outline mb-4">
-                                <label class="form-label  d-flex" for="email">Email</label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                    class="form-control form-control-lg" />
-                                @error('email')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="form-outline mb-4">
-                                <label class="form-label  d-flex" for="password">Password</label>
-                                <input type="password" id="password" name="password"
-                                    class="form-control form-control-lg" />
-                                @error('email')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <!-- Checkbox -->
-                            <div class="form-check d-flex justify-content-start mb-4">
-                                <label class="form-check-label" for="checkbox"> Remember password </label>
-                                <input class="form-check-input" type="checkbox" value="" id="checkbox" />
-                            </div>
-                            <button type="submit" class="btn btn-lg theme-btn-primary btn-block mx-auto">Login</button>
-                            <div class="mt-2">Not registered?
-                                <a href="{{ route('register') }}">Register for free.</a>
-                            </div>
-                            <hr class="my-4">
-                            <button class=" btn-lg btn-block  btn-google" type="submit">
+                        <div class="card-body p-5 text-center">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <h3 class="mb-5">Sign in</h3>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label  d-flex" for="email">Email</label>
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                        class="form-control form-control-lg" />
+                                    @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label  d-flex" for="password">Password</label>
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-lg" />
+                                    @error('email')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <!-- Checkbox -->
+                                <div class="form-check d-flex justify-content-start mb-4">
+                                    <label class="form-check-label" for="checkbox"> Remember password </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="checkbox" />
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-lg theme-btn-primary btn-block mx-auto">Login</button>
+                                <div class="mt-2">Not registered?
+                                    <a href="{{ route('register') }}">Register for free.</a>
+                                </div>
+                                <hr class="my-4">
+                            </form>
+                            <a class="btn-lg btn-block btn-google" href="{{ route('google-auth') }}">
                                 <i class="fab fa-google "></i>
                                 Sign in with google
-                            </button>
-                            <button class=" btn-lg btn-block  btn-facebook" type="submit"><i
-                                    class="fab fa-facebook-f "></i>Sign in with facebook
-                            </button>
-                        </form>
+                            </a>
+                            <a class=" btn-lg btn-block  btn-facebook" href="#fb"><i
+                                    class="fab fa-facebook-f "></i>Sign
+                                in with facebook
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

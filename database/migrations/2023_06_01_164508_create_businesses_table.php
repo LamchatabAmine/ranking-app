@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('city_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->string('title');
             $table->string('logo');
             $table->longText('description');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
         });
     }
 

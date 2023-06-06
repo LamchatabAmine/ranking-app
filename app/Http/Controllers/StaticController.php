@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+// use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+// use Illuminate\Support\Facades\View;
 
 class StaticController extends Controller
 {
-    //
     public function home()
     {
         return view('app.index');
@@ -34,5 +37,11 @@ class StaticController extends Controller
     public function addListing()
     {
         return view('app.add-listing');
+    }
+    public function show(Request $request)
+    {
+        return View::make('profile.user', [
+            'user' => $request->user(),
+        ]);
     }
 }

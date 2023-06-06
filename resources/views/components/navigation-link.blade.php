@@ -14,7 +14,7 @@
     @if (Route::has('login'))
         @auth
             <li>
-                <a href="{{ route('profile.edit') }}">
+                <a href="{{ route('myAccount') }}">
                     {{ __('My_account') }}
                 </a>
             </li>

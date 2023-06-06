@@ -19,11 +19,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="breadcrumb-content">
+                    <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
                         <div class="section-heading">
                             <h2 class="sec__title text-white font-size-40 line-height-55">Listhub Connects People with
                                 Great <br> Local Businesses.</h2>
                         </div>
+                        <ul class="list-items bread-list">
+                            <li><a href="{{ route('home-page') }}">Home</a></li>
+                            <li>About</li>
+                        </ul>
                     </div><!-- end breadcrumb-content -->
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->

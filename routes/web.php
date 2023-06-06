@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaticController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,20 +23,22 @@ Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page
 Route::get('/addListing', [StaticController::class, 'addListing'])->name('addListing-page')->middleware(['auth', 'IsConsumer']);
 
 
-
-// Route::get('/login', [StaticController::class, 'login'])->name('login-page');
-// Route::get('/register', [StaticController::class, 'register'])->name('register-page');
+Route::get('/myAccount', [StaticController::class, 'show'])->name('myAccount');
 
 
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'IsConsumer'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::get('/auth/google/redirect', [GoogleController::class, 'handleGoogleRedirect'])->name('google-auth');
+
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+
 
 require __DIR__ . '/auth.php';

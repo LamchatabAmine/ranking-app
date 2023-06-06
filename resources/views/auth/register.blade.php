@@ -85,13 +85,13 @@
                                 <a href="{{ route('login') }}">Sign in</a>
                             </div>
                             <hr class="my-4">
-                            <button class=" btn-lg btn-block  btn-google" type="submit">
+                            <a class=" btn-lg btn-block  btn-google" href="{{ route('google-auth') }}">
                                 <i class="fab fa-google "></i>
                                 Sign Up with google
-                            </button>
-                            <button class=" btn-lg btn-block  btn-facebook" type="submit"><i
+                            </a>
+                            <a class=" btn-lg btn-block  btn-facebook" href="#fb"><i
                                     class="fab fa-facebook-f "></i>Sign Up with facebook
-                            </button>
+                            </a>
                         </form>
                     </div>
                 </div>
