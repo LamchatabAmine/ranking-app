@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Business;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BusinessRequest extends FormRequest
@@ -11,8 +13,10 @@ class BusinessRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // dd($this->business);
+        return $this->user()->can('update-business', Business::findOrFail($this->business->id));
     }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,14 +26,15 @@ class BusinessRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'city_id' => ['required'],
-            'category_id' => ['required'],
+            'city' => 'required',
+            'category' => ['required'],
             'title' => ['required', 'string', 'max:255'],
+            'phone' => ['required'],
             'description' => ['required'],
             'website' => ['required', 'url'],
             'address' => ['required', 'string', 'max:255'],
             'logo' => ['required', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'images' => ['required', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'images.*' => ['required', 'mimes:jpeg,png,jpg,gif'],
         ];
     }
 }

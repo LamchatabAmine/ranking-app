@@ -21,7 +21,7 @@ class BusinessController extends Controller
         $categories = Category::all();
         $cities = City::all();
 
-        return view('app.add-listing', compact('categories', 'cities'));
+        return view('business.add-listing', compact('categories', 'cities'))->with('success', 'business Added successfully');
     }
 
     /**
@@ -39,7 +39,6 @@ class BusinessController extends Controller
     public function store(BusinessRequest $request)
     {
         // Validate the form data using the BusinessRequest class
-        dd($request);
         $validatedData = $request->validated();
 
         // Move the uploaded logo file
@@ -50,98 +49,135 @@ class BusinessController extends Controller
         // Create a new Business instance
         $business = new Business();
         $business->user_id = $request->user()->id; // Use the authenticated user's ID
-        $business->city_id = $validatedData['city_id'];
-        $business->category_id = $validatedData['category_id'];
+        $business->city_id = $validatedData['city'];
+        $business->category_id = $validatedData['category'];
         $business->title = strip_tags($validatedData['title']);
+        $business->phone = strip_tags($validatedData['phone']);
         $business->description = strip_tags($validatedData['description']);
         $business->website = strip_tags($validatedData['website']);
         $business->address = strip_tags($validatedData['address']);
         $business->logo = $path; // Store the logo path
-
         $business->save();
 
-        return redirect()->route('business.index');
+        $business_id = Business::latest('id')->value('id');
+
+        $images = array();
+        if ($files = $request->file('images')) {
+            foreach ($files as $key  => $file) {
+                $gallery = new Gallery();
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_name = random_int(100, 100000) . time() . '.' . $ext;
+                $upload_path = 'images/business/gallery/';
+                $file->move($upload_path, $image_name);
+                $gallery->path = $upload_path . $image_name;
+                $gallery->business_id = $business_id;
+                $gallery->type = ($key === 0) ? 1 : 0;
+                $images[] = $gallery->path;
+
+                $gallery->save();
+            }
+        }
+
+        return redirect()->route('business.detail', $business_id)->with('success', 'business Updated successfully');
     }
-
-
-
-    // public function store(BusinessRequest $request)
-    // {
-
-    //     $request->user()->fill($request->validated());
-    //     // if (Auth::check()) {
-    //     //     $userId = Auth::id();
-    //     //     return $userId;
-    //     // }
-
-
-    //     dd($request);
-
-
-
-
-    //     $business = new User;
-    //     $logo_name = time() . '.' . $request->logo->getClientOriginalExtension();
-    //     $request->logo->move(public_path('images/Business/'), $logo_name);
-    //     $path = "images/Business/" . $logo_name;
-    //     $request->user()->logo = $path;
-
-    //     $business->user_id = Auth::id();
-    //     $business->city_id = $request->input('city_id');
-    //     $business->category_id = $request->input('category_id');
-    //     $business->title = strip_tags($request->input('title'));
-    //     $business->description = strip_tags($request->input('description'));
-    //     $business->website = strip_tags($request->input('website'));
-    //     $business->address = strip_tags($request->input('address'));
-    //     $business->save();
-
-    //     // $table2 = new Gallery();
-    //     // $table2->path = $request->input('column1');
-    //     // $table2->save();
-
-
-
-
-
-    //     // if ($request->has('images')) {
-    //     //     foreach ($request->file('images') as $image) {
-    //     //         $image_name = time() . '.' . $image->extension();
-    //     //         $image->move(public_path('images/Business/'), $image_name);
-    //     //         Gallery::create([
-    //     //             'business_id' => '',
-    //     //             'path' => $image_name,
-    //     //             'type' => '',
-    //     //         ]);
-    //     //     }
-    //     // }
-
-
-
-    //     return redirect()->route('business.index');
-    // }
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+
+        $categories = Category::all();
+        $cities = City::all();
+        $galleries = Gallery::all();
+        $users = User::all();
+        return view('business.listing-details', [
+            'business' => Business::findOrFail($id),
+            'categories' => $categories,
+            'cities' => $cities,
+            'galleries' => $galleries,
+            'users' => $users,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request, Business $business)
     {
-        //
+
+        $this->authorize('update-business', $business);
+
+        $categories = Category::all();
+        $cities = City::all();
+        $galleries = Gallery::all();
+
+
+        return view('business.edit', [
+            'business' => Business::findOrFail($business->id),
+            'categories' => $categories,
+            'cities' => $cities,
+            'galleries' => $galleries
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BusinessRequest $request, Business $business)
     {
-        //
+        // $this->authorize('update-business', $business);
+        // Validate the form data using the BusinessRequest class
+        $validatedData = $request->validated();
+        // Move the uploaded logo file
+        $logo_name = time() . '.' . $request->logo->getClientOriginalExtension();
+        $request->logo->move(public_path('images/Business/'), $logo_name);
+        $path = "images/Business/" . $logo_name;
+
+        // Create a new Business instance
+        $business = Business::findOrFail($business->id);
+
+        $business->user_id = $request->user()->id; // Use the authenticated user's ID
+        $business->city_id = $validatedData['city'];
+        $business->category_id = $validatedData['category'];
+        $business->title = strip_tags($validatedData['title']);
+        $business->phone = strip_tags($validatedData['phone']);
+        $business->description = strip_tags($validatedData['description']);
+        $business->website = strip_tags($validatedData['website']);
+        $business->address = strip_tags($validatedData['address']);
+        $business->logo = $path; // Store the logo path
+        $business->save();
+
+        $images = array();
+        if ($files = $request->file('images')) {
+            foreach ($files as $key  => $file) {
+                $gallery = new Gallery();
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_name = random_int(100, 100000) . time() . '.' . $ext;
+                $upload_path = 'images/business/gallery/';
+                $file->move($upload_path, $image_name);
+                $gallery->path = $upload_path . $image_name;
+                $gallery->business_id = $business->id;
+                $gallery->type = ($key === 0) ? 1 : 0;
+                $images[] = $gallery->path;
+
+                $gallery->save();
+            }
+        }
+
+        return redirect()->route('business.detail', $business->id)->with('success', 'business Updated successfully');
+    }
+
+    public function removeImage(string $id)
+    {
+        $image = Gallery::findOrFail($id);
+
+        if (!$image) abort(404);
+
+        unlink(public_path($image->path));
+
+        $image->delete();
+
+        return back()->with('success', 'image deleted successfully');
     }
 
     /**
@@ -149,6 +185,15 @@ class BusinessController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $DeleteBusiness = Business::findOrFail($id);
+        $business_id = $DeleteBusiness->id;
+        $DeleteBusiness->delete();
+
+        $DeleteGallery = Gallery::where('business_id', $business_id);
+        $DeleteGallery->delete();
+
+
+        return back()->with('success', 'business deleted successfully');
     }
 }

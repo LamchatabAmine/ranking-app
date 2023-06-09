@@ -1,7 +1,13 @@
+{{-- @dd($businesses) --}}
+
+{{-- @dd($galleries->where('business_id', $businesses->id)->where('type', 1)); --}}
+
 <x-app-layout>
 
     {{--  HEADER AREA --}}
     <x-header />
+
+
 
 
     {{-- <!--  per-loader --> --}}
@@ -54,46 +60,83 @@
     {{-- START USER-DETAILS AREA --}}
     <section class="user-detail-area padding-top-60px padding-bottom-100px">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-8">
                     <div class="user-listing-detail-wrap">
                         <div class="section-heading pb-1">
-                            <h2 class="sec__title font-size-24 line-height-30">{{ $user->fullName }} Listings</h2>
+                            <h2 class="sec__title font-size-24 line-height-30">{{ $user->fullName }} Businesses</h2>
                         </div><!-- end section-heading -->
                         <div class="row pb-3">
-                            @for ($i = 0; $i < 4; $i++)
-                                <div class="col-lg-6 responsive-column">
-                                    <x-card-item>
-                                        <x-slot:imageName>
-                                            img1
-                                            </x-slot>
-                                            <x-slot:businessLogo>
-                                                photoshop
+                            @if ($businesses->isNotEmpty())
+                                @foreach ($businesses as $business)
+                                    <div class="col-lg-6 responsive-column">
+                                        <x-card-item>
+                                            <x-slot:linkBusiness>
+                                                {{ route('business.detail', $business->id) }}
+                                                {{-- linkBusiness --}}
                                                 </x-slot>
-                                                <x-slot:cardTitle>
-                                                    Roma's Ristorante Italiano
+                                                <x-slot:imageName>
+                                                    {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                                     </x-slot>
-                                                    <x-slot:cardSub>
-                                                        Bishop Avenue, New York
+                                                    <x-slot:linkUser>
+                                                        #linkUser
                                                         </x-slot>
-                                                        <x-slot:rate>
-                                                            4.7
+                                                        <x-slot:businessLogo>
+                                                            {{ $business->logo }}
                                                             </x-slot>
-                                                            <x-slot:review>
-                                                                5
+                                                            <x-slot:cardTitle>
+                                                                {{ $business->title }}
                                                                 </x-slot>
-                                                                <x-slot:category>
-                                                                    Restaurant
+                                                                <x-slot:cardSub>
+                                                                    {{ $business->address }}
                                                                     </x-slot>
-                                                                    <x-slot:linkWeb>
-                                                                        www.techydevs.com
+                                                                    <x-slot:rate>
+                                                                        4.7
                                                                         </x-slot>
-                                                                        <x-slot:date>
-                                                                            Opened a few days ago
+                                                                        <x-slot:review>
+                                                                            5
                                                                             </x-slot>
-                                    </x-card-item>
-                                </div><!-- end col-lg-6 -->
-                            @endfor
+                                                                            <x-slot:category>
+                                                                                {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                                                </x-slot>
+                                                                                <x-slot:linkWeb>
+                                                                                    {{ $business->website }}
+                                                                                    </x-slot>
+                                                                                    <div class="mt-3 d-flex"
+                                                                                        role="group"
+                                                                                        aria-label="Basic example">
+                                                                                        <div class="mr-3">
+                                                                                            <a href="{{ route('business.edit', $business->id) }}"
+                                                                                                class="btn gradient-btn me-3">Edit</a>
+                                                                                        </div>
+                                                                                        <div class="">
+                                                                                            <form
+                                                                                                action="{{ route('business.destroy', $business->id) }}"
+                                                                                                method="post">
+                                                                                                @csrf
+                                                                                                @method('DELETE')
+                                                                                                <input
+                                                                                                    class="btn btn-danger"
+                                                                                                    type="submit"
+                                                                                                    value="Delete">
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                        </x-card-item>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p class="text-danger">There is no businesses
+                                    <a href="{{ route('business.index') }}" class="btn-link">Go to add a
+                                        business</a>
+                                </p>
+                            @endif
+
                         </div><!-- end row -->
                         <div class="user-reviews">
                             <div class="section-heading pb-1">

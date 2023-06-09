@@ -30,8 +30,13 @@ Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page
 Route::middleware(['auth', 'IsConsumer'])->group(function () {
     Route::get('/business', [BusinessController::class, 'index'])->name('business.index');
     Route::post('/business', [BusinessController::class, 'store'])->name('business.store');
+    Route::get('/business/{business}/edit', [BusinessController::class, 'edit'])->name('business.edit');
+    Route::patch('/business/{business}', [BusinessController::class, 'update'])->name('business.update');
+    Route::get('/business/{id}/remove', [BusinessController::class, 'removeImage'])->name('business.removeImage');
+    Route::delete('/business/{id}', [BusinessController::class, 'destroy'])->name('business.destroy');
 });
 
+Route::get('/business/detail/{id}', [BusinessController::class, 'show'])->name('business.detail');
 
 
 

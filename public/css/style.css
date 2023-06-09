@@ -2981,7 +2981,7 @@ body {
 }
 
 .user-chosen-select-container .chosen-single span {
-    color: #808996
+    color: #000
 }
 
 .user-chosen-select-container .chosen-single div {
@@ -7558,7 +7558,8 @@ div.datedropper .picker .pick-lg-b li {
     width: 100%;
     -webkit-border-radius: 8px 8px 0 0;
     -moz-border-radius: 8px 8px 0 0;
-    border-radius: 8px 8px 0 0
+    border-radius: 8px 8px 0 0;
+    max-height: 250px;
 }
 
 .card-item .card-image .badge {
@@ -8688,7 +8689,8 @@ div.datedropper .picker .pick-lg-b li {
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
-    transition: all .3s
+    transition: all .3s;
+    max-height: 50px;
 }
 
 .generic-img-card:after {

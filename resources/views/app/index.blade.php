@@ -321,7 +321,6 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-    {{-- END HERO-WRAPPER AREA --}}
 
     {{--  CATEGORY AREA --}}
     <section class="category-area bg-gray arrow-down-shape position-relative section-padding">
@@ -361,105 +360,6 @@
                                     </x-slot>
                     </x-category-item>
                 @endforeach
-
-
-                {{-- <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Travels
-                            </x-slot>
-
-                            <x-slot:listing>
-                                55 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Hotels
-                            </x-slot>
-
-                            <x-slot:listing>
-                                44 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Events
-                            </x-slot>
-
-                            <x-slot:listing>
-                                33 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Shops
-                            </x-slot>
-
-                            <x-slot:listing>
-                                66 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Fitness
-                            </x-slot>
-
-                            <x-slot:listing>
-                                33 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Food & Drink
-                            </x-slot>
-
-                            <x-slot:listing>
-                                44 Listings
-                                </x-slot>
-                </x-category-item>
-
-                <x-category-item>
-                    <x-slot:imageName>
-                        home-page-img
-                        </x-slot>
-
-                        <x-slot:title>
-                            Art & Design
-                            </x-slot>
-
-                            <x-slot:listing>
-                                11 Listings
-                                </x-slot>
-                </x-category-item> --}}
             </div>
             <!-- end row -->
             <div class="more-btn-box pt-3 text-center">
@@ -468,7 +368,6 @@
             </div>
         </div><!-- end container -->
     </section>
-    {{-- end category-area --}}
 
     {{--  CARD AREA --}}
     <section class="card-area section-padding">
@@ -493,112 +392,47 @@
             </div>
             <!-- end row -->
             <div class="row padding-top-60px">
-                <div class="col-lg-4 responsive-column">
-                    <x-card-item>
-                        <x-slot:imageName>
-                            img1
-                            </x-slot>
-                            <x-slot:businessLogo>
-                                photoshop
-                                </x-slot>
-                                <x-slot:cardTitle>
-                                    Roma's Ristorante Italiano
+                @if ($businesses)
+                    @foreach ($businesses->take(3) as $business)
+                        <div class="col-lg-4 responsive-column">
+                            <x-card-item>
+                                <x-slot:linkBusiness>
+                                    {{ route('business.detail', $business->id) }}
                                     </x-slot>
-                                    <x-slot:cardSub>
-                                        Bishop Avenue, New York
+                                    <x-slot:imageName>
+                                        {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                         </x-slot>
-                                        <x-slot:rate>
-                                            4.7
+                                        <x-slot:linkUser>
+                                            #linkUser
                                             </x-slot>
-                                            <x-slot:review>
-                                                5
+                                            <x-slot:businessLogo>
+                                                {{ $business->logo }}
                                                 </x-slot>
-                                                <x-slot:category>
-                                                    Restaurant
+                                                <x-slot:cardTitle>
+                                                    {{ $business->title }}
                                                     </x-slot>
-                                                    <x-slot:linkWeb>
-                                                        www.techydevs.com
+                                                    <x-slot:cardSub>
+                                                        {{ $business->address }}
                                                         </x-slot>
-                                                        <x-slot:date>
-                                                            Opened a few days ago
+                                                        <x-slot:rate>
+                                                            4.7
                                                             </x-slot>
-                    </x-card-item>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-
-                <div class="col-lg-4 responsive-column">
-                    <x-card-item>
-                        <x-slot:imageName>
-                            img2
-                            </x-slot>
-                            <x-slot:businessLogo>
-                                sketch
-                                </x-slot>
-                                <x-slot:cardTitle>
-                                    Dumpling Baby China Bistro
-                                    </x-slot>
-                                    <x-slot:cardSub>
-                                        Bishop Avenue, New York
-                                        </x-slot>
-                                        <x-slot:rate>
-                                            4.7
-                                            </x-slot>
-                                            <x-slot:review>
-                                                5
-                                                </x-slot>
-                                                <x-slot:category>
-                                                    Restaurant
-                                                    </x-slot>
-                                                    <x-slot:linkWeb>
-                                                        www.techydevs.com
-                                                        </x-slot>
-                                                        <x-slot:date>
-                                                            Opened 5 weeks ago
-                                                            </x-slot>
-                    </x-card-item>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-
-                <div class="col-lg-4 responsive-column">
-                    <x-card-item>
-                        <x-slot:imageName>
-                            img3
-                            </x-slot>
-                            <x-slot:businessLogo>
-                                listing-logo
-                                </x-slot>
-                                <x-slot:cardTitle>
-                                    Yerba Buena Fresh Mex
-                                    </x-slot>
-                                    <x-slot:cardSub>
-                                        Bishop Avenue, New York
-                                        </x-slot>
-                                        <x-slot:rate>
-                                            4.7
-                                            </x-slot>
-                                            <x-slot:review>
-                                                5
-                                                </x-slot>
-                                                <x-slot:category>
-                                                    Restaurant
-                                                    </x-slot>
-                                                    <x-slot:linkWeb>
-                                                        www.techydevs.com
-                                                        </x-slot>
-                                                        <x-slot:date>
-                                                            Opened 3 weeks ago
-                                                            </x-slot>
-                    </x-card-item>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
+                                                            <x-slot:review>
+                                                                5
+                                                                </x-slot>
+                                                                <x-slot:category>
+                                                                    {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                                    </x-slot>
+                                                                    <x-slot:linkWeb>
+                                                                        {{ $business->website }}
+                                                                        </x-slot>
+                            </x-card-item>
+                        </div>
+                    @endforeach
+                @endif
             </div><!-- end row -->
-
         </div><!-- end container -->
     </section>
-    {{-- END CARD AREA --}}
 
 
     {{--  HIW AREA --}}
@@ -669,7 +503,6 @@
             <!-- end row -->
         </div><!-- end container -->
     </section>
-    {{-- END HIW AREA --}}
 
 
 
@@ -693,194 +526,52 @@
                     {{-- <!-- end section-heading --> --}}
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->
-            <div class="row padding-top-60px">
-                <div class="col-lg-12">
-                    <div class="card-carousel owl-trigger-action">
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
+            <div class="col-lg-12">
+                <div class="row padding-top-60px">
+                    @if ($businesses)
+                        @foreach ($businesses->take(6) as $business)
+                            <div class="col-lg-4 responsive-column">
+                                <x-card-item>
+                                    <x-slot:linkBusiness>
+                                        {{ route('business.detail', $business->id) }}
+                                        {{-- linkBusiness --}}
                                         </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
+                                        <x-slot:imageName>
+                                            {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                             </x-slot>
-                                            <x-slot:rate>
-                                                4.7
+                                            <x-slot:linkUser>
+                                                #linkUser
                                                 </x-slot>
-                                                <x-slot:review>
-                                                    5
+                                                <x-slot:businessLogo>
+                                                    {{ $business->logo }}
                                                     </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
+                                                    <x-slot:cardTitle>
+                                                        {{ $business->title }}
                                                         </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
+                                                        <x-slot:cardSub>
+                                                            {{ $business->address }}
                                                             </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
+                                                            <x-slot:rate>
+                                                                4.7
                                                                 </x-slot>
-                        </x-card-item>
-
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
-                                        </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
-                                            </x-slot>
-                                            <x-slot:rate>
-                                                4.7
-                                                </x-slot>
-                                                <x-slot:review>
-                                                    5
-                                                    </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
-                                                        </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
-                                                            </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
-                                                                </x-slot>
-                        </x-card-item>
-
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
-                                        </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
-                                            </x-slot>
-                                            <x-slot:rate>
-                                                4.7
-                                                </x-slot>
-                                                <x-slot:review>
-                                                    5
-                                                    </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
-                                                        </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
-                                                            </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
-                                                                </x-slot>
-                        </x-card-item>
-
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
-                                        </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
-                                            </x-slot>
-                                            <x-slot:rate>
-                                                4.7
-                                                </x-slot>
-                                                <x-slot:review>
-                                                    5
-                                                    </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
-                                                        </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
-                                                            </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
-                                                                </x-slot>
-                        </x-card-item>
-
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
-                                        </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
-                                            </x-slot>
-                                            <x-slot:rate>
-                                                4.7
-                                                </x-slot>
-                                                <x-slot:review>
-                                                    5
-                                                    </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
-                                                        </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
-                                                            </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
-                                                                </x-slot>
-                        </x-card-item>
-
-                        <x-card-item>
-                            <x-slot:imageName>
-                                img3
-                                </x-slot>
-                                <x-slot:businessLogo>
-                                    listing-logo
-                                    </x-slot>
-                                    <x-slot:cardTitle>
-                                        Yerba Buena Fresh Mex
-                                        </x-slot>
-                                        <x-slot:cardSub>
-                                            Bishop Avenue, New York
-                                            </x-slot>
-                                            <x-slot:rate>
-                                                4.7
-                                                </x-slot>
-                                                <x-slot:review>
-                                                    5
-                                                    </x-slot>
-                                                    <x-slot:category>
-                                                        Restaurant
-                                                        </x-slot>
-                                                        <x-slot:linkWeb>
-                                                            www.techydevs.com
-                                                            </x-slot>
-                                                            <x-slot:date>
-                                                                Opened 3 weeks ago
-                                                                </x-slot>
-                        </x-card-item>
-                    </div><!-- end card-carousel -->
-                </div><!-- end col-lg-12 -->
-            </div><!-- end row -->
+                                                                <x-slot:review>
+                                                                    5
+                                                                    </x-slot>
+                                                                    <x-slot:category>
+                                                                        {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                                        </x-slot>
+                                                                        <x-slot:linkWeb>
+                                                                            {{ $business->website }}
+                                                                            </x-slot>
+                                </x-card-item>
+                            </div>
+                        @endforeach
+                    @endif
+                    {{--  --}}
+                </div><!-- end row -->
+            </div>
         </div><!-- end container -->
     </section>
-    {{-- END CARD AREA --}}
 
 
 
@@ -984,7 +675,6 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-    {{-- END FUN-FACT AREA --}}
 
 
 
@@ -1093,7 +783,6 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-    {{--  TESTIMONIAL AREA --}}
 
     <div class="section-block"></div>
     {{--  CTA AREA --}}
@@ -1138,8 +827,7 @@
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->
         </div><!-- end container -->
-    </section><!-- end cta-area -->
-    {{-- END CTA AREA --}}
+    </section>
 
 
     {{--  FOOTER AREA --}}
@@ -1149,6 +837,5 @@
 
     {{-- <!--  back-to-top --> --}}
     <div id="back-to-top"> <i class="la la-arrow-up" title="Go top"></i>
-        {{-- <!-- end back-to-top --> --}}
 
 </x-app-layout>

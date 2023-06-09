@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('city_id')->unsigned();
             $table->bigInteger('category_id')->unsigned();
             $table->string('title');
+            $table->string('phone')->unique();
             $table->string('logo');
             $table->longText('description');
             $table->string('website');

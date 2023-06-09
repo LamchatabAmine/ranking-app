@@ -17,19 +17,6 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    // public function index(Request $request)
-    // {
-    //     return view('profile.user', [
-    //         'user' => $request->user(),
-    //     ]);
-    // }
-    // public function show()
-    // {
-    //     //
-    //     return view('profile.user', [
-    //         'user' => User::all()
-    //     ]);
-    // }
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -54,9 +41,8 @@ class ProfileController extends Controller
         }
         $request->user()->save();
 
-        // session()->flash('success', 'Update was successful!');
 
-        return redirect()->back();
+        return back()->with('success', 'Update was successful!');
     }
 
     // /**

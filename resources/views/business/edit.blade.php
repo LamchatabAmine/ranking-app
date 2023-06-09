@@ -1,3 +1,6 @@
+{{-- @dd($galleries->where('business_id', $business->id)->count()) --}}
+
+
 <x-app-layout>
     <!-- start per-loader -->
     <div class="loader-container">
@@ -20,11 +23,11 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
                         <div class="section-heading">
-                            <h2 class="sec__title text-white font-size-40 mb-0">Submit Your Listing</h2>
+                            <h2 class="sec__title text-white font-size-40 mb-0">Edit Business</h2>
                         </div>
                         <ul class="list-items bread-list ">
-                            <li><a href="index-2.html">Home</a></li>
-                            <li>Add New Listing</li>
+                            <li><a href="{{ route('home-page') }}">Home</a></li>
+                            <li>Edit Business</li>
                         </ul>
                     </div><!-- end breadcrumb-content -->
                 </div><!-- end col-lg-12 -->
@@ -55,10 +58,16 @@
     {{-- START ADD-LISTING AREA --}}
     <section class="add-listing-area section-padding">
         <div class="container">
-            <div class="row">
-                <form action="{{ route('business.store') }}" method="POST" enctype="multipart/form-data"
-                    class="col-lg-10 mx-auto">
-                    @csrf
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <form action="{{ route('business.update', $business->id) }}" method="POST" enctype="multipart/form-data"
+                class="col-lg-10 mx-auto">
+                @csrf
+                @method('patch')
+                <div class="row">
                     <div class="block-card mb-4">
                         <div class="block-card-header">
                             <h2 class="widget-title">General Information</h2>
@@ -71,19 +80,36 @@
                                         <label class="label-text d-flex align-items-center">Title</label>
                                         <div class="form-group">
                                             <input class="form-control" type="text" name="title"
-                                                placeholder="Example: Super Duper Burgers" value="{{ old('title') }}">
+                                                value="{{ $business->title }}">
                                             @error('title')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
-                                </div><!-- end col-lg-12 -->
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="input-box">
+                                        <label class="label-text d-flex align-items-center">Business phone</label>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="phone"
+                                                value="{{ $business->phone }}" min="10">
+                                            @error('phone')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="input-box">
                                         <label class="label-text">Category</label>
                                         <div class="form-group user-chosen-select-container">
-                                            <select name="category_id" id="category" class="user-chosen-select">
-                                                <option value="">Select a category</option>
+                                            <select name="category" id="category" class="user-chosen-select">
+                                                <option
+                                                    value="{{ $categories->firstWhere('id', $business->category_id)['id'] }}">
+                                                    {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                </option>
                                                 @foreach ($categories->where('parent_category_id', null) as $category)
                                                     <optgroup label="{{ $category->category_name }}">
                                                         @foreach ($categories->where('parent_category_id', $category->id) as $subCategory)
@@ -99,13 +125,17 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div><!-- end col-lg-12 -->
+                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="input-box">
                                         <label class="label-text d-flex align-items-center">City</label>
                                         <div class="form-group user-chosen-select-container">
-                                            <select name="city_id" id="city" class="user-chosen-select">
-                                                <option value="">Select a city</option>
+                                            <select name="city" id="city" class="user-chosen-select">
+                                                <option
+                                                    value="{{ $cities->firstWhere('id', $business->city_id)['id'] }}">
+                                                    {{ $cities->firstWhere('id', $business->city_id)['city_name'] }}
+                                                </option>
                                                 @foreach ($cities->where('parent_city_id', null) as $city)
                                                     <optgroup label="{{ $city->city_name }}">
                                                         @foreach ($cities->where('parent_city_id', $city->id) as $subCity)
@@ -122,44 +152,46 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="input-box">
                                         <label class="label-text">Description</label>
                                         <div class="form-group">
-                                            <textarea class="message-control form-control user-text-editor" name="description" id="description">{{ old('description') }}</textarea>
+                                            <textarea name="description" class="message-control form-control user-text-editor" id="description">{{ $business->description }}</textarea>
                                             @error('description')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
-                                </div><!-- end col-lg-12 -->
+                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="input-box">
                                         <label class="label-text d-flex align-items-center">Web Address</label>
                                         <div class="form-group">
                                             <span class="la la-globe form-icon"></span>
                                             <input class="form-control" type="text" name="website"
-                                                placeholder="https://www.ranking.com/" value="{{ old('website') }}">
+                                                value="{{ $business->website }}">
                                             @error('website')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
-                                </div><!-- end col-lg-12 -->
+                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="input-box">
                                         <label class="label-text d-flex align-items-center">Local Address</label>
                                         <div class="form-group mb-0">
                                             <span class="la la-globe form-icon"></span>
                                             <input class="form-control" type="text" name="address"
-                                                placeholder="Morocco-Tanger-Boulvard app-5°"
-                                                value="{{ old('address') }}">
+                                                value="{{ $business->address }}">
                                             @error('address')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
                                     </div>
-                                </div><!-- end col-lg-12 -->
+                                </div>
                             </div>
                         </div><!-- end block-card-body -->
                     </div>
@@ -169,27 +201,62 @@
                             <h2 class="widget-title">Media</h2>
                             <div class="stroke-shape"></div>
                         </div><!-- block-card-header -->
-                        <div class="block-card-body">
-                            <label class="label-text">Gallery Images</label>
-                            <div class="file-upload-wrap">
-                                <input type="file" name="images[]" class="multi file-upload-input with-preview"
-                                    multiple>
-                                <span class="file-upload-text"><i class="la la-upload mr-2"></i>Drop files here or
-                                    click to upload</span>
-                            </div>
-                            @error('files[]')
+
+
+                        <label class="label-text">Gallery Images</label>
+                        <div class="row">
+                            @php
+                                $filteredGalleries = $galleries->where('business_id', $business->id)->toArray();
+                            @endphp
+                            @foreach ($filteredGalleries as $gallery)
+                                <div class="card col-lg-4 responsive-column mt-2 mr-2"
+                                    style="width: 18rem;padding-right: 0px;padding-left: 0px;">
+                                    <div class="cart-item">
+                                        <div class="card-image">
+                                            <img src="{{ url($gallery['path']) }}" class="card-img"
+                                                alt="card-image">
+                                        </div>
+                                        <div class="card-content mt-4 mb-2" style="margin-left: 10px;">
+                                            <a href="{{ route('business.removeImage', $gallery['id']) }}"
+                                                class="btn btn-primary site-button button-sm">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="file-upload-wrap mt-3">
+                            <label for="images[]" class="label-text">Add new Gallery</label>
+                            <input type="file" name="images[]" class="multi file-upload-input with-preview"
+                                multiple>
+                            <span class="file-upload-text"><i class="la la-upload mr-2"></i>Drop files here or
+                                click to upload</span>
+                            @error('images.*')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
+                        </div>
+
+
+                        <div class="mt-4">
                             <label class="label-text">Upload Business Logo</label>
-                            <div class="file-upload-wrap file-upload-wrap-2">
-                                <input type="file" name="logo" class="multi file-upload-input with-preview">
-                                <span class="file-upload-text"><i class="la la-photo mr-2"></i>Choose a file</span>
-                                @error('logo')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                            <div class="row mt-3">
+                                <div class="mr-4">
+                                    <a href="#$linkUser" class="user-thumb d-inline-block " data-toggle="tooltip"
+                                        data-placement="top">
+                                        <img src="{{ url($business->logo) }}" alt="author-img">
+                                    </a>
+                                </div>
+                                <div class="file-upload-wrap file-upload-wrap-2 ">
+                                    <input type="file" name="logo"
+                                        class="multi file-upload-input with-preview">
+                                    <span class="file-upload-text"><i class="la la-photo mr-2"></i>Update logo</span>
+                                    @error('logo')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
-                        </div><!-- end block-card-body -->
+                        </div>
                     </div>
+
                     <div class="submit-wrap pt-4">
                         <div class="custom-checkbox">
                             <input type="checkbox" id="agreeChb2">
@@ -200,12 +267,12 @@
                             </label>
                         </div>
                         <div class="btn-box mt-4">
-                            <button type="submit" class="theme-btn gradient-btn border-0">Save & Preview</button>
+                            <button type="submit" class="theme-btn gradient-btn border-0">Update & Preview</button>
                         </div>
                     </div>
-                </form>
-            </div><!-- end row -->
-        </div><!-- end container -->
+                </div><!-- end row -->
+            </form>
+        </div>
     </section>
 
 

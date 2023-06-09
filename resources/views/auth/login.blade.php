@@ -62,7 +62,7 @@
                                     <label class="form-label  d-flex" for="password">Password</label>
                                     <input type="password" id="password" name="password"
                                         class="form-control form-control-lg" />
-                                    @error('email')
+                                    @error('password')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

@@ -17,6 +17,7 @@ class Business extends Model
         'city_id',
         'category_id',
         'title',
+        'phone',
         'logo',
         'description',
         'website',

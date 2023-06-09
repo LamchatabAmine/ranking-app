@@ -43,15 +43,15 @@
 
 
     <section>
-        {{-- @if (Session::has('success'))
-            <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong> {{ Session::get('success') }} </strong>
-            </div>
-        @endif --}}
+
         <!-- OUR BLOG START -->
         <div class="section-full p-t120 p-b90 site-bg-white">
             <div class="container">
+                @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <form class="row" method="post" action="{{ route('profile.update') }}"
                     enctype="multipart/form-data">
                     @csrf
