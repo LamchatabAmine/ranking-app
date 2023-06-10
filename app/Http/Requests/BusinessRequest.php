@@ -13,7 +13,6 @@ class BusinessRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // dd($this->business);
         return $this->user()->can('update-business', Business::findOrFail($this->business->id));
     }
 
