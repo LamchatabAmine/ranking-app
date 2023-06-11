@@ -8,7 +8,8 @@
                 <div class="col-lg-3 responsive-column">
                     <div class="footer-item">
                         <div class="footer-logo">
-                            <a href="index-2.html" class="foot-logo"><img src="images/logo-black.png" alt="logo"></a>
+                            <a href="{{ route('home-page') }}" class="foot-logo"><img
+                                    src="{{ url('images/new-logo-black.png') }}" alt="logo"></a>
                         </div>
                         <!-- end footer-logo -->
                         <ul class="list-items contact-links pt-3">

@@ -40,14 +40,15 @@
                             </p>
                         </div>
                     </div><!-- end hero-heading -->
-                    <div class="main-search-input">
+                    <form method="GET" action="{{ route('search') }}" class="main-search-input">
                         <div class="main-search-input-item">
-                            <form action="#" class="form-box">
+                            <div action="#" class="form-box">
                                 <div class="form-group mb-0">
                                     <span class="la la-search form-icon"></span>
-                                    <input class="form-control" type="search" placeholder="What are you looking for?">
+                                    <input name="keyword" type="search" class="form-control"
+                                        placeholder="What are you looking for?">
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="main-search-input-item user-chosen-select-container">
                             <select name="city" class="user-chosen-select">
@@ -312,10 +313,10 @@
                             </select>
                         </div>
                         <div class="main-search-input-item">
-                            <button class="theme-btn gradient-btn border-0 w-100" type="submit"><i
+                            <button type="submit" class="theme-btn gradient-btn border-0 w-100"><i
                                     class="la la-search mr-2"></i>Search Now</button>
                         </div>
-                    </div><!-- end main-search-input -->
+                    </form><!-- end main-search-input -->
 
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->

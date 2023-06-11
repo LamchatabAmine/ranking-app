@@ -57,7 +57,7 @@
                 <div class="col-lg-12">
                     <div class="menu-full-width">
                         <div class="logo">
-                            <a href="{{ route('home-page') }}"><img src="{{ url('images/logo-white.png') }}"
+                            <a href="{{ route('home-page') }}"><img src="{{ url('images/new-logo.png') }}"
                                     alt="logo"></a>
                             <div class="d-flex align-items-center">
                                 <a href="add-listing.html"

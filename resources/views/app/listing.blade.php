@@ -151,14 +151,15 @@
                     </div><!-- end row -->
                 </div><!-- end col-lg-8 -->
                 <div class="col-lg-4">
-                    <div class="sidebar mb-0">
+                    <form method="GET" action="{{ route('search') }}" class="sidebar mb-0">
                         <div class="sidebar-widget">
                             <h3 class="widget-title">Search</h3>
                             <div class="stroke-shape mb-4"></div>
-                            <form action="#" class="form-box">
+                            <div class="form-box">
                                 <div class="form-group">
                                     <span class="la la-search form-icon"></span>
-                                    <input class="form-control" type="search" placeholder="What are you looking for?">
+                                    <input type="search" name="keyword" class="form-control"
+                                        placeholder="What are you looking for?">
                                 </div>
                                 <div class="form-group user-chosen-select-container">
                                     <select name="city" class="user-chosen-select">
@@ -183,11 +184,10 @@
                                     </select>
                                 </div><!-- end form-group -->
                                 <div class="btn-box">
-                                    <button type="submit" class="theme-btn gradient-btn border-0 w-100 mt-3">
-                                        <i class="la la-search mr-2"></i>Search Now
-                                    </button>
+                                    <button type="submit" class="theme-btn gradient-btn border-0 w-100 mt-3">Search
+                                        Now</button>
                                 </div><!-- end btn-box -->
-                            </form>
+                            </div>
                         </div>
 
                         <div class="sidebar-widget">
@@ -196,16 +196,18 @@
                             <div class="checkbox-wrap">
                                 @foreach ($cities->whereNotNull('parent_city_id')->slice(0, 4) as $city)
                                     <div class="custom-checkbox">
-                                        <input type="checkbox" id="outerSunsetChb">
+                                        <input type="checkbox" name="city[]" value="{{ $city->id }}"
+                                            id="outerSunsetChb">
                                         <label for="outerSunsetChb">{{ $city->city_name }}</label>
                                     </div>
                                 @endforeach
 
 
                                 <div class="collapse collapse-content" id="showMoreOptionCollapse3">
-                                    @foreach ($cities->whereNotNull('parent_city_id')->slice(4, 4) as $city)
+                                    @foreach ($cities->whereNotNull('parent_city_id')->skip(4) as $city)
                                         <div class="custom-checkbox">
-                                            <input type="checkbox" id="outerSunsetChb">
+                                            <input type="checkbox" name="city[]" value="{{ $city->id }}"
+                                                id="outerSunsetChb">
                                             <label for="outerSunsetChb">{{ $city->city_name }}</label>
                                         </div>
                                     @endforeach
@@ -398,12 +400,9 @@
                                 <button type="submit" class="theme-btn gradient-btn w-100 border-0">
                                     Apply Filter <i class="la la-arrow-right ml-1"></i>
                                 </button>
-                                <button type="submit" class="btn-gray btn-gray-lg mt-3 w-100">
-                                    <i class="la la-redo-alt mr-1"></i> Reset Filters
-                                </button>
                             </div>
                         </div>
-                    </div><!-- end sidebar -->
+                    </form><!-- end sidebar -->
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\StaticController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::get('/about', [StaticController::class, 'about'])->name('about-page');
 Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page');
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
 
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 
 // Route::resource('business', BusinessController::class)->middleware(['auth', 'IsConsumer']);
