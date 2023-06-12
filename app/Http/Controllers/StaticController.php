@@ -48,7 +48,7 @@ class StaticController extends Controller
     }
     public function listing()
     {
-        $businesses = Business::all();
+        $businesses = Business::paginate(2);
         $categories = Category::all();
         $cities = City::all();
         $galleries = Gallery::all();

@@ -24,6 +24,28 @@ class BusinessController extends Controller
         return view('business.add-listing', compact('categories', 'cities'))->with('success', 'business Added successfully');
     }
 
+    public function sort(Request $request)
+    {
+        $sortOrder = $request->input('sort_order');
+
+        // Perform the sorting based on the selected option
+        if ($sortOrder === 'newest-Listing') {
+            // Sort the listing in ascending order
+            $business = Business::orderBy('created_at', 'asc')->get();
+        } elseif ($sortOrder === 'older-Listing') {
+            // Sort the listing in descending order
+            $business = Business::orderBy('created_at', 'desc')->get();
+        } else {
+            $business = Business::all();
+        }
+
+        $galleries = Gallery::all(); // Assuming you have a Gallery model
+        $categories = Category::all(); // Assuming you have a Category model
+
+        return view('app.listing', compact('businesses', 'galleries', 'categories'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

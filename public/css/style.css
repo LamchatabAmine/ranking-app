@@ -8743,10 +8743,10 @@ div.datedropper .picker .pick-lg-b li {
 }
 
 .generic-img-card-content .badge {
-    background-color: #fff;
-    color: var(--primary-color);
+    /* background-color: #fff; */
+    color: #fff;
     padding: 6px 12px 6px 24px;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 14px;
     position: relative;
     -webkit-transition: all .3s;
@@ -8868,6 +8868,16 @@ div.datedropper .picker .pick-lg-b li {
     -o-transform: translateY(-4px);
     transform: translateY(-4px)
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.check-active {
+    background-color: #fff;
+    color: var(--primary-color) !important;
+}
+
 
 @media (max-width: 425px) {
     .countdown-box {

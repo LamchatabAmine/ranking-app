@@ -1,14 +1,3 @@
-@php
-    // $image_principale = $galleries
-    //     ->where('business_id', $businesses->id)
-    //     ->where('type', 1)
-    //     ->pluck('path')
-    //     ->first();
-    // $category_name = $categories->firstWhere('id', $businesses->category_id)['category_name'];
-@endphp
-
-
-
 <x-app-layout>
 
     {{--  HEADER AREA --}}
@@ -42,9 +31,8 @@
         <div class="bread-svg">
             <x-svgs.svg-item />
         </div><!-- end bread-svg -->
+
     </section><!-- end breadcrumb-area -->
-
-
 
 
 
@@ -62,16 +50,12 @@
                                 <i class="la la-sliders mr-1"></i>Detailed Search
                             </a>
                             <div class="user-chosen-select-container ml-3">
-                                <select class="user-chosen-select">
+                                <select id="sort-order-select" class="user-chosen-select">
                                     <option value="sort-by-default">Sort by default</option>
                                     <option value="high-rated">High Rated</option>
                                     <option value="most-reviewed">Most Reviewed</option>
-                                    <option value="popular-Listing">Popular Listing</option>
-                                    <option value="newest-Listing">Newest Listing</option>
-                                    <option value="older-Listing">Older Listing</option>
-                                    <option value="price-low-to-high">Price: low to high</option>
-                                    <option value="price-high-to-low">Price: high to low</option>
-                                    <option value="all-listings">Random</option>
+                                    <option value="newest-Listing">Ascending</option>
+                                    <option value="older-Listing">Descending</option>
                                 </select>
                             </div>
                         </div><!-- end filter-bar-action -->
@@ -107,44 +91,16 @@
                                 </div>
                             @endforeach
                         @else
-                            <p class="text-danger">There is no businesses
-                                <a href="{{ route('business.index') }}" class="btn btn-link">Go to add a business</a>
-                            </p>
+                            <div class="alert alert-warning" role="alert">
+                                There is no Businesses with this Filter!
+                            </div>
                         @endif
                     </div><!-- end row -->
                     <div class="row">
                         <div class="col-lg-12 pt-3 text-center">
                             <div class="pagination-wrapper d-inline-block">
                                 <div class="section-pagination">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination flex-wrap justify-content-center">
-                                            <li class="page-item">
-                                                <a class="page-link page-link-first" href="#"><i
-                                                        class="la la-long-arrow-left mr-1"></i> First</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true"><i class="la la-angle-left"></i></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link page-link-active"
-                                                    href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true"><i class="la la-angle-right"></i></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link page-link-last" href="#">Last <i
-                                                        class="la la-long-arrow-right ml-1"></i></a>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                                    {{ $businesses->appends(request()->except('page'))->links() }}
                                 </div><!-- end section-pagination -->
                             </div>
                         </div><!-- end col-lg-12 -->
@@ -159,13 +115,16 @@
                                 <div class="form-group">
                                     <span class="la la-search form-icon"></span>
                                     <input type="search" name="keyword" class="form-control"
-                                        placeholder="What are you looking for?">
+                                        placeholder="What are you looking for?"
+                                        @if (request()->filled('keyword')) value="{{ request()->input('keyword') }}" @endif>
                                 </div>
-                                <div class="form-group user-chosen-select-container">
+
+                                {{-- <div class="form-group user-chosen-select-container">
                                     <select name="city" class="user-chosen-select">
                                         <option value="">Select a City</option>
                                         @foreach ($cities as $city)
-                                            <option value="{{ $city->id }}">
+                                            <option value="{{ $city->id }}"
+                                                @if (request()->filled('keyword') || request()->input('city') == $city->id) selected @endif>
                                                 {{ $city->parent_city ? $city->parent_city->city_name . ' > ' : '' }}
                                                 {{ $city->city_name }}
                                             </option>
@@ -176,13 +135,15 @@
                                     <select name="category" class="user-chosen-select">
                                         <option value="">Select a category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">
+                                            <option value="{{ $category->id }}"
+                                                @if (request()->filled('keyword') || request()->input('category') == $category->id) selected @endif>
                                                 {{ $category->parent_category ? $category->parent_category->category_name . ' > ' : '' }}
                                                 {{ $category->category_name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                </div><!-- end form-group -->
+                                </div><!-- end form-group --> --}}
+
                                 <div class="btn-box">
                                     <button type="submit" class="theme-btn gradient-btn border-0 w-100 mt-3">Search
                                         Now</button>
@@ -196,19 +157,23 @@
                             <div class="checkbox-wrap">
                                 @foreach ($cities->whereNotNull('parent_city_id')->slice(0, 4) as $city)
                                     <div class="custom-checkbox">
-                                        <input type="checkbox" name="city[]" value="{{ $city->id }}"
-                                            id="outerSunsetChb">
-                                        <label for="outerSunsetChb">{{ $city->city_name }}</label>
+                                        <input type="checkbox" name="city" value="{{ $city->id }}"
+                                            id="outerSunsetChb{{ $city->id }}"
+                                            @if (in_array($city->id, (array) request()->input('city')) && request()->has('city')) checked @endif>
+                                        <label for="outerSunsetChb{{ $city->id }}">{{ $city->city_name }}</label>
                                     </div>
                                 @endforeach
+
 
 
                                 <div class="collapse collapse-content" id="showMoreOptionCollapse3">
                                     @foreach ($cities->whereNotNull('parent_city_id')->skip(4) as $city)
                                         <div class="custom-checkbox">
-                                            <input type="checkbox" name="city[]" value="{{ $city->id }}"
-                                                id="outerSunsetChb">
-                                            <label for="outerSunsetChb">{{ $city->city_name }}</label>
+                                            <input type="checkbox" name="city" value="{{ $city->id }}"
+                                                id="outerSunsetChb{{ $city->id }}"
+                                                @if (in_array($city->id, (array) request()->input('city')) && request()->has('city')) checked @endif>
+                                            <label
+                                                for="outerSunsetChb{{ $city->id }}">{{ $city->city_name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -225,56 +190,37 @@
                             <div class="stroke-shape mb-4"></div>
                             <div class="category-list">
                                 @foreach ($categories->whereNotNull('parent_category_id')->slice(0, 4) as $category)
-                                    <a href="#" class="generic-img-card d-block hover-y overflow-hidden mb-3">
+                                    <div class="generic-img-card d-block hover-y overflow-hidden mb-3 cursor-pointer">
                                         <img src="images/bleu-background.jpg" alt="image"
                                             class="generic-img-card-img lazy">
-                                        <div
-                                            class="generic-img-card-content d-flex align-items-center justify-content-between">
-                                            <span class="badge">{{ $category->category_name }}</span>
+                                        <div class="generic-img-card-content d-flex align-items-center justify-content-between"
+                                            id>
+                                            <input type="checkbox" name="category" value="{{ $category->id }}"
+                                                id="category_{{ $category->id }}" style="display: none;">
+                                            <label for="category_{{ $category->id }}"
+                                                class="badge cursor-pointer">{{ $category->category_name }}</label>
                                             <span class="generic-img-card-counter">238</span>
                                         </div>
-                                    </a>
+                                    </div>
                                 @endforeach
-                                <div class="collapse collapse-content" id="showMoreOptionCollapse2">
-                                    @foreach ($categories->whereNotNull('parent_category_id')->slice(4, 4) as $category)
-                                        <a href="#"
-                                            class="generic-img-card d-block hover-y overflow-hidden mb-3">
+
+
+                                <div class="collapse collapse-content cursor-pointer" id="showMoreOptionCollapse2">
+                                    @foreach ($categories->whereNotNull('parent_category_id')->skip(4) as $category)
+                                        <div
+                                            class="generic-img-card d-block hover-y overflow-hidden mb-3 cursor-pointer">
                                             <img src="images/bleu-background.jpg" alt="image"
                                                 class="generic-img-card-img lazy">
                                             <div
                                                 class="generic-img-card-content d-flex align-items-center justify-content-between">
-                                                <span class="badge">{{ $category->category_name }}</span>
+                                                <input type="checkbox" name="category" value="{{ $category->id }}"
+                                                    id="category_{{ $category->id }}" style="display: none;">
+                                                <label for="category_{{ $category->id }}"
+                                                    class="badge cursor-pointer">{{ $category->category_name }}</label>
                                                 <span class="generic-img-card-counter">238</span>
                                             </div>
-                                        </a>
+                                        </div>
                                     @endforeach
-                                    {{-- <a href="#" class="generic-img-card d-block hover-y overflow-hidden mb-3">
-                                        <img src="images/img-loading.html" data-src="images/generic-small-img-5.jpg"
-                                            alt="image" class="generic-img-card-img lazy">
-                                        <div
-                                            class="generic-img-card-content d-flex align-items-center justify-content-between">
-                                            <span class="badge">Shopping</span>
-                                            <span class="generic-img-card-counter">321</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="generic-img-card d-block hover-y overflow-hidden mb-3">
-                                        <img src="images/img-loading.html" data-src="images/generic-small-img-6.jpg"
-                                            alt="image" class="generic-img-card-img lazy">
-                                        <div
-                                            class="generic-img-card-content d-flex align-items-center justify-content-between">
-                                            <span class="badge">Travel</span>
-                                            <span class="generic-img-card-counter">12</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="generic-img-card d-block hover-y overflow-hidden mb-3">
-                                        <img src="images/img-loading.html" data-src="images/generic-small-img-7.jpg"
-                                            alt="image" class="generic-img-card-img lazy">
-                                        <div
-                                            class="generic-img-card-content d-flex align-items-center justify-content-between">
-                                            <span class="badge">Jobs</span>
-                                            <span class="generic-img-card-counter">133</span>
-                                        </div>
-                                    </a> --}}
                                 </div>
                                 <a class="collapse-btn" data-toggle="collapse" href="#showMoreOptionCollapse2"
                                     role="button" aria-expanded="false" aria-controls="showMoreOptionCollapse2">

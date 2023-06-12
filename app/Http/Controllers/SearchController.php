@@ -28,7 +28,7 @@ class SearchController extends Controller
             ->when($cityId, function ($query, $cityId) {
                 $query->where('city_id', $cityId);
             })
-            ->paginate(10); // Adjust the pagination limit as 10
+            ->paginate(2); // Adjust the pagination limit as 10
 
 
         // Retrieve all categories and cities for the filter options

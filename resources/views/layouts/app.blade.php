@@ -41,6 +41,7 @@
 
     <!-- Script -->
     <script src="{{ url('https://kit.fontawesome.com/c7a60e43cd.js') }}" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Template JS Files -->
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>

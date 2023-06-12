@@ -24,7 +24,7 @@ Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
-
+Route::post('/http://127.0.0.1:8000/listing', [BusinessController::class, 'sort'])->name('listing.sort');
 
 // Route::resource('business', BusinessController::class)->middleware(['auth', 'IsConsumer']);
 
