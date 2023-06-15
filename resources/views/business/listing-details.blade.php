@@ -1,7 +1,8 @@
 @php
     $user = $users->where('id', $business->user_id)->first();
+    $reviews = $review->where('business_id', $business->id);
+    $count = $review->where('business_id', $business->id)->count();
 @endphp
-
 <x-app-layout>
 
     {{--  HEADER AREA --}}
@@ -182,135 +183,60 @@
                                 </ul>
                             </div><!-- end block-card-body -->
                         </div><!-- end block-card -->
-
                         <div class="block-card mb-4">
                             <div class="block-card-header">
-                                <h2 class="widget-title">Rating Stats</h2>
-                                <div class="stroke-shape"></div>
-                            </div><!-- end block-card-header -->
-                            <div class="block-card-body">
-                                <div class="review-content d-flex flex-wrap align-items-center">
-                                    <div class="review-rating-summary">
-                                        <span class="stats-average__count">
-                                            4.6
-                                        </span><!-- end stats-average__count -->
-                                        <div class="star-rating-wrap">
-                                            <p class="font-size-14 font-weight-medium">out of 5.0</p>
-                                            <div class="star-rating text-color-5 font-size-18">
-                                                <span><i class="la la-star"></i></span>
-                                                <span class="ml-n1"><i class="la la-star"></i></span>
-                                                <span class="ml-n1"><i class="la la-star"></i></span>
-                                                <span class="ml-n1"><i class="la la-star"></i></span>
-                                                <span class="ml-n1"><i class="la la-star"></i></span>
-                                            </div>
-                                        </div>
-                                    </div><!-- end review-rating-summary -->
-
-                                </div><!-- end review-content -->
-                            </div><!-- end block-card-body -->
-                        </div><!-- end block-card -->
-                        <div class="block-card mb-4">
-                            <div class="block-card-header">
-                                <h2 class="widget-title">Reviews <span class="ml-1 text-color-2">(5)</span></h2>
+                                <h2 class="widget-title">Reviews <span
+                                        class="ml-1 text-color-2">({{ $count }})</span></h2>
                                 <div class="stroke-shape"></div>
                             </div><!-- end block-card-header -->
                             <div class="block-card-body">
                                 <div class="comments-list">
-                                    <div class="comment">
-                                        <div class="user-thumb user-thumb-lg flex-shrink-0">
-                                            <img src="images/avatar-img.jpg" alt="author-img">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="meta-data d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <h4 class="comment__title">Adam Smith</h4>
-                                                    <span class="comment__meta">San Francisco, CA</span>
-                                                </div>
-                                                <div class="star-rating-wrap text-center">
-                                                    <div class="star-rating text-color-5 font-size-18">
-                                                        <span><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
+                                    @if ($reviews->isEmpty())
+                                        <p>There is no reviews in this business</p>
+                                    @else
+                                        @foreach ($reviews as $review)
+                                            @php
+                                                $user = $users->where('id', $review->user_id)->first();
+                                            @endphp
+                                            <div class="comment">
+                                                <div class="comment-body">
+                                                    <div
+                                                        class="meta-data d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="comment__title">{{ $user->fullName }}</h4>
+                                                        </div>
+                                                        <div class="star-rating-wrap text-center">
+                                                            <div class="star-rating text-color-5 font-size-18">
+                                                                @if ($review->score > 0)
+                                                                    @for ($i = 0; $i < $review->score; $i++)
+                                                                        <span class="ml-n1"><i
+                                                                                class="la la-star"></i></span>
+                                                                    @endfor
+                                                                @else
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                @endif
+                                                            </div>
+                                                            <p class="font-size-13 font-weight-medium">
+                                                                {{ $review->created_at }}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <p class="font-size-13 font-weight-medium">04/10/2020</p>
+                                                    <p class="comment-desc">
+                                                        {{ $review->message }}
+                                                    </p>
                                                 </div>
                                             </div>
-                                            <p class="comment-desc">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut enim ad minim veniam, quis nostrud exercitation.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="comment">
-                                        <div class="user-thumb user-thumb-lg flex-shrink-0">
-                                            <img src="images/avatar-img.jpg" alt="author-img">
-                                        </div>
-                                        <div class="comment-body">
-                                            <div class="meta-data d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <h4 class="comment__title">Adam Smith</h4>
-                                                    <span class="comment__meta">San Francisco, CA</span>
-                                                </div>
-                                                <div class="star-rating-wrap text-center">
-                                                    <div class="star-rating text-color-5 font-size-18">
-                                                        <span><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                        <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    </div>
-                                                    <p class="font-size-13 font-weight-medium">04/10/2020</p>
-                                                </div>
-                                            </div>
-                                            <p class="comment-desc">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut enim ad minim veniam, quis nostrud exercitation.
-                                            </p>
-                                        </div>
-                                    </div><!-- end comment -->
-                                </div>
-
-                                <div class="text-center">
-                                    <div class="pagination-wrapper d-inline-block">
-                                        <div class="section-pagination">
-                                            <nav aria-label="Page navigation">
-                                                <ul class="pagination flex-wrap justify-content-center">
-                                                    <li class="page-item">
-                                                        <a class="page-link page-link-first" href="#"><i
-                                                                class="la la-long-arrow-left mr-1"></i> First</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true"><i
-                                                                    class="la la-angle-left"></i></span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link page-link-active"
-                                                            href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true"><i
-                                                                    class="la la-angle-right"></i></span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link page-link-last" href="#">Last <i
-                                                                class="la la-long-arrow-right ml-1"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div><!-- end section-pagination -->
-                                    </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div><!-- end block-card -->
@@ -319,99 +245,37 @@
                                 <h2 class="widget-title pb-1">Add a Review</h2>
                                 <p>Your email address will not be published. Required fields are marked *</p>
                             </div><!-- end block-card-header -->
-                            <div class="block-card-body">
+                            <form method="POST" action="{{ route('review.store', $business->id) }}"
+                                class="block-card-body">
+                                @csrf
                                 <div
                                     class="add-rating-bars review-bars d-flex flex-row flex-wrap flex-grow-1 align-items-center justify-content-between">
                                     <div class="review-bars-item mx-0 mt-0">
                                         <span class="review-bars-name">Service</span>
                                         <div class="review-bars-inner pt-1">
-                                            <form class="leave-rating">
-                                                <input type="radio" name="rating" id="rating-1" value="1">
-                                                <label for="rating-1" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-2" value="2">
-                                                <label for="rating-2" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-3" value="3">
-                                                <label for="rating-3" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-4" value="4">
-                                                <label for="rating-4" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-5" value="5">
+                                            <div class="leave-rating">
+                                                <input type="radio" id="rating-5" value="5"
+                                                    onclick="setScoreValue(5)">
                                                 <label for="rating-5" class="fa fa-star"></label>
-                                            </form>
-                                        </div>
-                                    </div><!-- end review-bars-item -->
-                                    <div class="review-bars-item mx-0 mt-0">
-                                        <span class="review-bars-name">Value for Money</span>
-                                        <div class="review-bars-inner pt-1">
-                                            <form class="leave-rating">
-                                                <input type="radio" name="rating" id="rating-6" value="1">
-                                                <label for="rating-6" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-7" value="2">
-                                                <label for="rating-7" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-8" value="3">
-                                                <label for="rating-8" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-9" value="4">
-                                                <label for="rating-9" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-10" value="5">
-                                                <label for="rating-10" class="fa fa-star"></label>
-                                            </form>
-                                        </div>
-                                    </div><!-- end review-bars-item -->
-                                    <div class="review-bars-item mx-0 mt-0">
-                                        <span class="review-bars-name">Quality</span>
-                                        <div class="review-bars-inner pt-1">
-                                            <form class="leave-rating">
-                                                <input type="radio" name="rating" id="rating-11" value="1">
-                                                <label for="rating-11" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-12" value="2">
-                                                <label for="rating-12" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-13" value="3">
-                                                <label for="rating-13" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-14" value="4">
-                                                <label for="rating-14" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-15" value="5">
-                                                <label for="rating-15" class="fa fa-star"></label>
-                                            </form>
-                                        </div>
-                                    </div><!-- end review-bars-item -->
-                                    <div class="review-bars-item mx-0 mt-0">
-                                        <span class="review-bars-name">Location</span>
-                                        <div class="review-bars-inner pt-1">
-                                            <form class="leave-rating">
-                                                <input type="radio" name="rating" id="rating-16" value="1">
-                                                <label for="rating-16" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-17" value="2">
-                                                <label for="rating-17" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-18" value="3">
-                                                <label for="rating-18" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-19" value="4">
-                                                <label for="rating-19" class="fa fa-star"></label>
-                                                <input type="radio" name="rating" id="rating-20" value="5">
-                                                <label for="rating-20" class="fa fa-star"></label>
-                                            </form>
+                                                <input type="radio" id="rating-4" value="4"
+                                                    onclick="setScoreValue(4)">
+                                                <label for="rating-4" class="fa fa-star"></label>
+                                                <input type="radio" id="rating-3" value="3"
+                                                    onclick="setScoreValue(3)">
+                                                <label for="rating-3" class="fa fa-star"></label>
+                                                <input type="radio" id="rating-2" value="2"
+                                                    onclick="setScoreValue(2)">
+                                                <label for="rating-2" class="fa fa-star"></label>
+                                                <input type="radio" id="rating-1" value="1"
+                                                    onclick="setScoreValue(1)">
+                                                <label for="rating-1" class="fa fa-star"></label>
+                                                <input type="hidden" name="score" id="score-value"
+                                                    value="0">
+                                            </div>
                                         </div>
                                     </div><!-- end review-bars-item -->
                                 </div><!-- end review-bars -->
-                                <form method="post" class="form-box row pt-3">
-                                    <div class="col-lg-6">
-                                        <div class="input-box">
-                                            <label class="label-text">Name</label>
-                                            <div class="form-group">
-                                                <span class="la la-user form-icon"></span>
-                                                <input class="form-control" type="text" name="name"
-                                                    placeholder="Your Name">
-                                            </div>
-                                        </div>
-                                    </div><!-- end col-lg-6 -->
-                                    <div class="col-lg-6">
-                                        <div class="input-box">
-                                            <label class="label-text">Email</label>
-                                            <div class="form-group">
-                                                <span class="la la-envelope-o form-icon"></span>
-                                                <input class="form-control" type="email" name="email"
-                                                    placeholder="Email Address">
-                                            </div>
-                                        </div>
-                                    </div><!-- end col-lg-6 -->
+                                <div class="form-box row pt-3">
                                     <div class="col-lg-12">
                                         <div class="input-box">
                                             <label class="label-text">Review</label>
@@ -424,12 +288,13 @@
                                     </div><!-- end col-lg-12 -->
                                     <div class="col-lg-12">
                                         <div class="btn-box pt-1">
-                                            <button class="theme-btn gradient-btn border-0">Submit Review<i
-                                                    class="la la-arrow-right ml-2"></i></button>
+                                            <button type="submit" class="theme-btn gradient-btn border-0">
+                                                Submit Review<i class="la la-arrow-right ml-2"></i>
+                                            </button>
                                         </div>
                                     </div><!-- end col-lg-12 -->
-                                </form>
-                            </div><!-- end block-card-body -->
+                                </div>
+                            </form><!-- end block-card-body -->
                         </div><!-- end block-card -->
                     </div><!-- end listing-detail-wrap -->
                 </div><!-- end col-lg-8 -->

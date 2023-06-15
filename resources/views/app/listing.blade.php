@@ -1,3 +1,4 @@
+{{-- @dd($count) --}}
 <x-app-layout>
 
     {{--  HEADER AREA --}}
@@ -39,23 +40,24 @@
 
     <section class="card-area section-padding">
         <div class="container">
-            <div class="row">
+            <form method="GET" action="{{ route('search') }}" class="row">
                 <div class="col-lg-12">
                     <div
                         class="filter-bar d-flex flex-wrap justify-content-between align-items-center margin-bottom-30px">
-                        <p class="result-text font-weight-medium">Showing 1 to 10 of 30,590 entries</p>
+                        <p class="result-text font-weight-medium">Showing 1 to 6 of {{ $count }} Listings
+                        </p>
                         <div class="filter-bar-action d-flex flex-wrap align-items-center">
                             <a href="#" class="search-filter" data-toggle="modal"
                                 data-target="#searchFilterModal">
                                 <i class="la la-sliders mr-1"></i>Detailed Search
                             </a>
                             <div class="user-chosen-select-container ml-3">
-                                <select id="sort-order-select" class="user-chosen-select">
+                                <select id="sort-order-select" name="sortOrder" class="user-chosen-select">
                                     <option value="sort-by-default">Sort by default</option>
-                                    <option value="high-rated">High Rated</option>
-                                    <option value="most-reviewed">Most Reviewed</option>
-                                    <option value="newest-Listing">Ascending</option>
-                                    <option value="older-Listing">Descending</option>
+                                    <option value="asc" @if (request('sortOrder') == 'asc') selected @endif>
+                                        Ascending</option>
+                                    <option value="desc" @if (request('sortOrder') == 'desc') selected @endif>
+                                        Descending</option>
                                 </select>
                             </div>
                         </div><!-- end filter-bar-action -->
@@ -82,7 +84,8 @@
                                                                         <x-slot:category>
                                                                             {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
                                                                             </x-slot>
-                                                                            <x-slot:linkWebSite>{{ $business->website }}
+                                                                            <x-slot:linkWebSite>
+                                                                                {{ $business->website }}
                                                                                 </x-slot>
                                                                                 <x-slot:webSite>
                                                                                     {{ $business->website }}
@@ -102,12 +105,13 @@
                                 <div class="section-pagination">
                                     {{ $businesses->appends(request()->except('page'))->links() }}
                                 </div><!-- end section-pagination -->
+
                             </div>
                         </div><!-- end col-lg-12 -->
                     </div><!-- end row -->
                 </div><!-- end col-lg-8 -->
                 <div class="col-lg-4">
-                    <form method="GET" action="{{ route('search') }}" class="sidebar mb-0">
+                    <div class="sidebar mb-0">
                         <div class="sidebar-widget">
                             <h3 class="widget-title">Search</h3>
                             <div class="stroke-shape mb-4"></div>
@@ -118,32 +122,6 @@
                                         placeholder="What are you looking for?"
                                         @if (request()->filled('keyword')) value="{{ request()->input('keyword') }}" @endif>
                                 </div>
-
-                                {{-- <div class="form-group user-chosen-select-container">
-                                    <select name="city" class="user-chosen-select">
-                                        <option value="">Select a City</option>
-                                        @foreach ($cities as $city)
-                                            <option value="{{ $city->id }}"
-                                                @if (request()->filled('keyword') || request()->input('city') == $city->id) selected @endif>
-                                                {{ $city->parent_city ? $city->parent_city->city_name . ' > ' : '' }}
-                                                {{ $city->city_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- end form-group -->
-                                <div class="form-group user-chosen-select-container">
-                                    <select name="category" class="user-chosen-select">
-                                        <option value="">Select a category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                @if (request()->filled('keyword') || request()->input('category') == $category->id) selected @endif>
-                                                {{ $category->parent_category ? $category->parent_category->category_name . ' > ' : '' }}
-                                                {{ $category->category_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- end form-group --> --}}
-
                                 <div class="btn-box">
                                     <button type="submit" class="theme-btn gradient-btn border-0 w-100 mt-3">Search
                                         Now</button>
@@ -348,10 +326,10 @@
                                 </button>
                             </div>
                         </div>
-                    </form><!-- end sidebar -->
+                    </div>
                 </div>
-            </div>
-        </div>
+                <!-- end sidebar -->
+            </form>
     </section><!-- end card-area -->
 
     {{--  FOOTER AREA --}}

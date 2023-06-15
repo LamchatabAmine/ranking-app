@@ -23,11 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any authentication / authorization services.
      */
+
     public function boot(): void
     {
-        //
-        Gate::define('update-business', function (User $user, Business $Business) {
-            return $user->id === $Business->user_id;
+        Gate::define('update-business', function (User $user, Business $business) {
+            return $user->id === $business->user_id;
         });
     }
 }

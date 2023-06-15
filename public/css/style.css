@@ -7556,6 +7556,7 @@ div.datedropper .picker .pick-lg-b li {
 
 .card-item .card-image .card__img {
     width: 100%;
+    height: 15.5rem;
     -webkit-border-radius: 8px 8px 0 0;
     -moz-border-radius: 8px 8px 0 0;
     border-radius: 8px 8px 0 0;
@@ -7733,7 +7734,8 @@ div.datedropper .picker .pick-lg-b li {
 
 .card-item .card-content {
     padding: 30px 20px 25px;
-    position: relative
+    position: relative;
+    padding-bottom: 5px;
 }
 
 .card-item .card-content .user-thumb {
@@ -7744,7 +7746,7 @@ div.datedropper .picker .pick-lg-b li {
 }
 
 .card-item .card-title {
-    font-size: 20px;
+    font-size: 16px;
     color: var(--primary-color);
     font-weight: 600;
     text-transform: capitalize;
@@ -7781,6 +7783,65 @@ div.datedropper .picker .pick-lg-b li {
 
 .card-item .listing-meta {
     padding-top: 15px
+}
+
+/*Navigation list*/
+.nav-list-1 ul {
+    list-style: none;
+    margin: 20px 0;
+    font-weight: 500;
+}
+
+.nav-list-1 ul li {
+    float: none;
+}
+
+.nav-list-1 ul li:last-child {
+    border-bottom: none;
+}
+
+.nav-list-1 ul li.has-child {
+    position: relative;
+}
+
+.nav-list-1 ul li a>i {
+    font-size: 18px;
+    margin-right: 25px;
+    position: absolute;
+    left: 10px;
+    top: 14px;
+    color: var(--primary-color);
+}
+
+.nav-list-1 ul>li>a {
+    padding: 10px 15px 10px 40px;
+    color: #000;
+    display: block;
+    font-size: 14px;
+    position: relative;
+    font-weight: 400;
+    transition: 0.5s all ease;
+}
+
+.nav-list-1 ul>li>a:hover {
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(180, 205, 237, 0.7);
+}
+
+.nav-list-1 ul>li ul {
+    display: none;
+    position: static;
+    visibility: visible;
+    width: auto;
+}
+
+.nav-list-1 ul>li.active>a {
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(180, 205, 237, 0.7);
 }
 
 @media (max-width: 1199px) {
@@ -9726,7 +9787,7 @@ div.datedropper .picker .pick-lg-b li {
 
 .dashboard-sidebar {
     min-height: 100vh;
-    width: 20rem;
+    width: 16rem;
     background-color: #fff;
     -webkit-box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
     -moz-box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
@@ -9804,7 +9865,7 @@ div.datedropper .picker .pick-lg-b li {
 .dashboard-body {
     background-color: #fafdfb;
     overflow-x: hidden;
-    width: calc(100% - 20rem);
+    width: calc(100% - 16rem);
     margin-left: auto
 }
 
@@ -10112,7 +10173,8 @@ div.datedropper .picker .pick-lg-b li {
 .dashboard-stat {
     -webkit-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
     -moz-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
-    box-shadow: 0 0 40px rgba(82, 85, 90, 0.1)
+    box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+    height: 12rem;
 }
 
 .dashboard-stat .card-title {

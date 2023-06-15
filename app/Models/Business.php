@@ -22,6 +22,7 @@ class Business extends Model
         'description',
         'website',
         'address',
+        'isActive',
         'created_at',
         'updated_at',
     ];

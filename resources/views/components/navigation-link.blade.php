@@ -13,11 +13,35 @@
     </li>
     @if (Route::has('login'))
         @auth
-            <li>
-                <a href="{{ route('myAccount') }}">
-                    {{ __('My_account') }}
-                </a>
-            </li>
+            @if (Auth::user()->role == 2)
+                <li>
+                    <a href="{{ route('myAccount') }}">
+                        {{ __('My Account') }}
+                    </a>
+                </li>
+            @endif
+        @endauth
+    @endif
+    @if (Route::has('login'))
+        @auth
+            @if (Auth::user()->role == 1)
+                <li>
+                    <a href="{{ route('manage') }}">
+                        {{ __('Manage') }}
+                    </a>
+                </li>
+            @endif
+        @endauth
+    @endif
+    @if (Route::has('login'))
+        @auth
+            @if (Auth::user()->role == 0)
+                <li>
+                    <a href="{{ route('admin') }}">
+                        {{ __('Dashboard') }}
+                    </a>
+                </li>
+            @endif
         @endauth
     @endif
 </ul>

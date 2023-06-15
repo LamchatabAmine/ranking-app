@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('description');
             $table->string('website');
             $table->string('address');
+            $table->bigInteger('isActive')->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('CASCADE');

@@ -1,15 +1,5 @@
-{{-- @dd($businesses) --}}
-
-{{-- @dd($galleries->where('business_id', $businesses->id)->where('type', 1)); --}}
-
 <x-app-layout>
-
-    {{--  HEADER AREA --}}
     <x-header />
-
-
-
-
     {{-- <!--  per-loader --> --}}
     <div class="loader-container">
         <div class="loader-ripple">
@@ -17,7 +7,6 @@
             <div></div>
         </div>
     </div>
-
     {{-- START BREADCRUMB AREA --}}
     <section class="breadcrumb-area bg-gray user-bread-bg pt-9 pb-0">
         <div class="overlay"></div>
@@ -56,7 +45,6 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-
     {{-- START USER-DETAILS AREA --}}
     <section class="user-detail-area padding-top-60px padding-bottom-100px">
         <div class="container">
@@ -136,151 +124,70 @@
                                         business</a>
                                 </p>
                             @endif
-
                         </div><!-- end row -->
                         <div class="user-reviews">
-                            <div class="section-heading pb-1">
-                                <h2 class="sec__title font-size-24 line-height-30">Reviews</h2>
-                            </div><!-- end section-heading -->
-                            <div class="comments-list reviews-list">
-                                <div class="comment">
-                                    <div class="user-thumb user-thumb-lg flex-shrink-0">
-                                        <img src="images/avatar-img.jpg" alt="author-img">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="meta-data d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h4 class="comment__title"><a href="listing-details.html">Kam Lok
-                                                        Restaurant</a></h4>
-                                                <span class="comment__meta">Mark Hardson</span>
-                                            </div>
-                                            <div class="star-rating-wrap text-center">
-                                                <div class="star-rating text-color-5 font-size-18">
-                                                    <span><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
+                            @if ($businesses->isNotEmpty())
+                                @foreach ($businesses as $business)
+                                    @php
+                                        $reviews = $review->where('business_id', $business->id);
+                                        $count = $review->where('business_id', $business->id)->count();
+                                    @endphp
+                                @endforeach
+
+                                <div class="section-heading pb-1">
+                                    <h2 class="sec__title font-size-24 line-height-30">Reviews <span
+                                            class="ml-1 text-color-2">({{ $count }})</span></h2>
+                                </div><!-- end section-heading -->
+                                <div class="comments-list reviews-list">
+                                    @if ($reviews->isEmpty())
+                                        <p>There is no reviews in your businesses</p>
+                                    @else
+                                        @foreach ($reviews as $review)
+                                            @php
+                                                $user = $users->where('id', $review->user_id)->first();
+                                            @endphp
+                                            <div class="comment">
+                                                <div class="comment-body">
+                                                    <div
+                                                        class="meta-data d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h4 class="comment__title">{{ $user->fullName }}</h4>
+                                                        </div>
+                                                        <div class="star-rating-wrap text-center">
+                                                            <div class="star-rating text-color-5 font-size-18">
+                                                                @if ($review->score > 0)
+                                                                    @for ($i = 0; $i < $review->score; $i++)
+                                                                        <span class="ml-n1"><i
+                                                                                class="la la-star"></i></span>
+                                                                    @endfor
+                                                                @else
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                    <span class="ml-n1"><i
+                                                                            class="lar la-star"></i></span>
+                                                                @endif
+                                                            </div>
+                                                            <p class="font-size-13 font-weight-medium">
+                                                                {{ $review->created_at }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="comment-desc">
+                                                        {{ $review->message }}
+                                                    </p>
                                                 </div>
-                                                <p class="font-size-13 font-weight-medium">04/10/2020</p>
                                             </div>
-                                        </div>
-                                        <p class="comment-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi at aut
-                                            consequuntur debitis dicta dolor ducimus eaque eum, illo ipsa labore,
-                                        </p>
-                                        <div class="review-photos d-flex flex-wrap align-items-center ml-n1">
-                                            <a href="images/single-listing-img1.jpg" class="d-inline-block"
-                                                data-fancybox="gallery">
-                                                <img class="lazy" src="images/img-loading.html"
-                                                    data-src="images/single-listing-img1.jpg" alt="review image">
-                                            </a>
-                                            <a href="images/single-listing-img2.jpg" class="d-inline-block"
-                                                data-fancybox="gallery">
-                                                <img class="lazy" src="images/img-loading.html"
-                                                    data-src="images/single-listing-img2.jpg" alt="review image">
-                                            </a>
-                                        </div><!-- end review-photos -->
-                                    </div>
-                                </div><!-- end comment -->
-                                <div class="comment">
-                                    <div class="user-thumb user-thumb-lg flex-shrink-0">
-                                        <img src="images/avatar-img.jpg" alt="author-img">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="meta-data d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h4 class="comment__title"><a href="listing-details.html">Mel’s
-                                                        Drive-In</a></h4>
-                                                <span class="comment__meta">Mark Hardson</span>
-                                            </div>
-                                            <div class="star-rating-wrap text-center">
-                                                <div class="star-rating text-color-5 font-size-18">
-                                                    <span><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                </div>
-                                                <p class="font-size-13 font-weight-medium">04/10/2020</p>
-                                            </div>
-                                        </div>
-                                        <p class="comment-desc mb-0">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi at aut
-                                            consequuntur debitis dicta dolor ducimus eaque eum, illo ipsa labore,
-                                        </p>
-                                    </div>
-                                </div><!-- end comment -->
-                                <div class="comment">
-                                    <div class="user-thumb user-thumb-lg flex-shrink-0">
-                                        <img src="images/avatar-img.jpg" alt="author-img">
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="meta-data d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <h4 class="comment__title"><a href="listing-details.html">Pearl’s
-                                                        Deluxe Burgers</a></h4>
-                                                <span class="comment__meta">Mark Hardson</span>
-                                            </div>
-                                            <div class="star-rating-wrap text-center">
-                                                <div class="star-rating text-color-5 font-size-18">
-                                                    <span><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star"></i></span>
-                                                    <span class="ml-n1"><i class="la la-star-o"></i></span>
-                                                </div>
-                                                <p class="font-size-13 font-weight-medium">04/10/2020</p>
-                                            </div>
-                                        </div>
-                                        <p class="comment-desc">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi at aut
-                                            consequuntur debitis dicta dolor ducimus eaque eum, illo ipsa labore,
-                                        </p>
-                                        <div class="review-photos d-flex flex-wrap align-items-center ml-n1 mb-3">
-                                            <a href="images/single-listing-img1.jpg" class="d-inline-block"
-                                                data-fancybox="gallery">
-                                                <img class="lazy" src="images/img-loading.html"
-                                                    data-src="images/single-listing-img1.jpg" alt="review image">
-                                            </a>
-                                            <a href="images/single-listing-img2.jpg" class="d-inline-block"
-                                                data-fancybox="gallery">
-                                                <img class="lazy" src="images/img-loading.html"
-                                                    data-src="images/single-listing-img2.jpg" alt="review image">
-                                            </a>
-                                            <a href="images/single-listing-img3.jpg" class="d-inline-block"
-                                                data-fancybox="gallery">
-                                                <img class="lazy" src="images/img-loading.html"
-                                                    data-src="images/single-listing-img3.jpg" alt="review image">
-                                            </a>
-                                        </div><!-- end review-photos -->
-                                    </div>
-                                </div><!-- end comment -->
-                            </div><!-- end comment-list -->
-                            <div class="pt-3 text-center">
-                                <div class="section-pagination">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination flex-wrap justify-content-center">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true"><i class="la la-arrow-left"></i></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link page-link-active"
-                                                    href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true"><i class="la la-arrow-right"></i></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div><!-- end section-pagination -->
-                            </div>
+                                        @endforeach
+                                    @endif
+                                </div><!-- end comment-list -->
+                            @endif
+
                         </div><!-- end user-reviews -->
                     </div><!-- end listing-detail-wrap -->
                 </div><!-- end col-lg-8 -->
@@ -378,18 +285,8 @@
             </div><!-- end row -->
         </div><!-- end container -->
     </section>
-
-
     {{--  FOOTER AREA --}}
     <x-footer />
-
-
-
     {{-- back-to-top  --}}
-    <div id="back-to-top">
-        <i class="la la-arrow-up" title="Go top"></i>
-    </div>
-
-
-
+    <div id="back-to-top"><i class="la la-arrow-up" title="Go top"></i></div>
 </x-app-layout>

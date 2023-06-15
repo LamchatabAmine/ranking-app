@@ -16,6 +16,7 @@ class SearchController extends Controller
         $keyword = $request->input('keyword');
         $categoryId = $request->input('category');
         $cityId = $request->input('city');
+        $sortOrder = $request->input('sortOrder');
 
         // Query the listings based on the provided filters
         $businesses = Business::query()
@@ -27,6 +28,13 @@ class SearchController extends Controller
             })
             ->when($cityId, function ($query, $cityId) {
                 $query->where('city_id', $cityId);
+            })
+            ->when($sortOrder, function ($query, $sortOrder) {
+                if ($sortOrder === 'title_asc') {
+                    $query->orderBy('title', 'asc');
+                } elseif ($sortOrder === 'title_desc') {
+                    $query->orderBy('title', 'desc');
+                }
             })
             ->paginate(2); // Adjust the pagination limit as 10
 

@@ -38,13 +38,16 @@
 
 
 
-
+    {{-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
     <!-- Script -->
+    {{-- <script src="{{ url('https://unpkg.com/axios/dist/axios.min.js') }}"></script> --}}
     <script src="{{ url('https://kit.fontawesome.com/c7a60e43cd.js') }}" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Template JS Files -->
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="{{ url('https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js') }}"></script>
+    <script src="{{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js') }}"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script src="{{ url('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ url('js/jquery-ui.js') }}"></script>
     <script src="{{ url('js/popper.min.js') }}"></script>

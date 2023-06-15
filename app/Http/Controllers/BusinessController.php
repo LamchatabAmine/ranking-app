@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
+use App\Models\Review;
 
 class BusinessController extends Controller
 {
@@ -24,26 +25,29 @@ class BusinessController extends Controller
         return view('business.add-listing', compact('categories', 'cities'))->with('success', 'business Added successfully');
     }
 
-    public function sort(Request $request)
-    {
-        $sortOrder = $request->input('sort_order');
 
-        // Perform the sorting based on the selected option
-        if ($sortOrder === 'newest-Listing') {
-            // Sort the listing in ascending order
-            $business = Business::orderBy('created_at', 'asc')->get();
-        } elseif ($sortOrder === 'older-Listing') {
-            // Sort the listing in descending order
-            $business = Business::orderBy('created_at', 'desc')->get();
-        } else {
-            $business = Business::all();
-        }
+    // public function sort(Request $request, $business_id)
+    // {
+    //     // $sortOrder = $request->input('sortOrder');
+    //     // dd($business_id);
+    //     // Perform the sorting based on the selected option
+    //     if ($business_id === 'Ascending') {
+    //         // Sort the listing in ascending order
+    //         $businesses = Business::orderBy('created_at', 'asc')->paginate(5);
+    //     } elseif ($business_id === 'Descending') {
+    //         // Sort the listing in descending order
+    //         $businesses = Business::orderBy('created_at', 'desc')->paginate(5);
+    //     } else {
+    //         $businesses = Business::paginate(5);
+    //     }
 
-        $galleries = Gallery::all(); // Assuming you have a Gallery model
-        $categories = Category::all(); // Assuming you have a Category model
+    //     $galleries = Gallery::all(); // Assuming you have a Gallery model
+    //     $categories = Category::all(); // Assuming you have a Category model
+    //     $cities = City::all();
+    //     // response()->json($business)
+    //     return view('app.listing', compact('businesses', 'galleries', 'categories', 'cities'));
+    // }
 
-        return view('app.listing', compact('businesses', 'galleries', 'categories'));
-    }
 
 
     /**
@@ -107,17 +111,18 @@ class BusinessController extends Controller
      */
     public function show(string $id)
     {
-
         $categories = Category::all();
         $cities = City::all();
         $galleries = Gallery::all();
         $users = User::all();
+        $review = Review::all();
         return view('business.listing-details', [
             'business' => Business::findOrFail($id),
             'categories' => $categories,
             'cities' => $cities,
             'galleries' => $galleries,
             'users' => $users,
+            'review' => $review,
         ]);
     }
 
@@ -147,7 +152,8 @@ class BusinessController extends Controller
      */
     public function update(BusinessRequest $request, Business $business)
     {
-        // $this->authorize('update-business', $business);
+        // $this->user()->can('update-business', Business::findOrFail($this->id));
+        $this->authorize('update-business', $business);
         // Validate the form data using the BusinessRequest class
         $validatedData = $request->validated();
         // Move the uploaded logo file
@@ -217,5 +223,16 @@ class BusinessController extends Controller
 
 
         return back()->with('success', 'business deleted successfully');
+    }
+
+    public function confirmChange($id)
+    {
+        $business = Business::findOrFail($id);
+        $business->isActive = 1;
+        $business->save();
+
+        // You can add any additional logic or redirect the user as needed
+
+        return redirect()->back()->with('success', 'Business change confirmed successfully.');
     }
 }

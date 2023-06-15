@@ -29,10 +29,12 @@
                 <a href="{{ $linkCategory }}" class="listing-cat-link">{{ $category }}</a>
             </li>
         </ul>
-        <ul class="info-list padding-top-20px">
+        <ul class="info-list padding-top-20px ">
             <li><span class="la la-link icon"></span>
                 <a href="{{ $linkWebSite }}"> {{ $webSite }}</a>
             </li>
         </ul>
+        {{ isset($btn) ? $btn : '' }}
+
     </div>
 </div>

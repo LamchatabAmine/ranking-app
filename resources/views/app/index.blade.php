@@ -111,7 +111,6 @@
                         <x-slot:imageName>
                             home-page-img
                             </x-slot>
-
                             <x-slot:title>
                                 {{ $category->category_name }}
                                 </x-slot>
@@ -169,24 +168,27 @@
                                             <x-slot:businessLogo>
                                                 {{ $business->logo }}
                                                 </x-slot>
-                                                <x-slot:cardTitle>
-                                                    {{ $business->title }}
+                                                <x-slot:linkCard>
+                                                    {{ route('business.detail', $business->id) }}
                                                     </x-slot>
-                                                    <x-slot:cardSub>
-                                                        {{ $business->address }}
+                                                    <x-slot:cardTitle>
+                                                        {{ $business->title }}
                                                         </x-slot>
-                                                        <x-slot:rate>
-                                                            4.7
+                                                        <x-slot:cardSub>
+                                                            {{ $business->address }}
                                                             </x-slot>
-                                                            <x-slot:review>
-                                                                5
+                                                            <x-slot:rate>
+                                                                4.7
                                                                 </x-slot>
-                                                                <x-slot:category>
-                                                                    {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                                <x-slot:review>
+                                                                    5
                                                                     </x-slot>
-                                                                    <x-slot:linkWeb>
-                                                                        {{ $business->website }}
+                                                                    <x-slot:category>
+                                                                        {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
                                                                         </x-slot>
+                                                                        <x-slot:linkWeb>
+                                                                            {{ $business->website }}
+                                                                            </x-slot>
                             </x-card-item>
                         </div>
                     @endforeach

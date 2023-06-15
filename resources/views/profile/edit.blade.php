@@ -1,20 +1,13 @@
 <x-app-layout>
-
-
     {{--  HEADER AREA --}}
     <x-header />
-
-
-    <!--  per-loader -->
+    {{-- <!--  per-loader --> --}}
     <div class="loader-container">
         <div class="loader-ripple">
             <div></div>
             <div></div>
         </div>
     </div>
-
-
-
     {{--  BREADCRUMB AREA --}}
     <section class="breadcrumb-area bread-bg-3 bread-overlay overflow-hidden">
         <div class="overlay"></div>
@@ -39,9 +32,6 @@
         </div>
     </section>
     {{-- END BREADCRUMB AREA --}}
-
-
-
     <section>
 
         <!-- OUR BLOG START -->
@@ -66,6 +56,9 @@
                                     <input type="file" name="image" id="file-uploader"
                                         accept=".jpg, .jpeg, .png" />
                                 </div>
+                                @error('image')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mid-content text-center">
                                 <a href="#" class="job-title">
@@ -154,21 +147,8 @@
         </div>
         <!-- OUR BLOG END -->
     </section>
-
-
-
-
-
     {{--  FOOTER AREA --}}
     <x-footer />
-
-
-
-    <!--  back-to-top -->
-    <div id="back-to-top">
-        <i class="la la-arrow-up" title="Go top"></i>
-    </div>
-    <!-- end back-to-top -->
-
-
+    {{--  back-to-top  --}}
+    <div id="back-to-top"><i class="la la-arrow-up" title="Go top"></i></div>
 </x-app-layout>

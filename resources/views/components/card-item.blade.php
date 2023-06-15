@@ -10,7 +10,7 @@
             <img src="{{ $businessLogo }}" alt="author-img">
         </a>
         <h4 class="card-title pt-3">
-            <a href="listing-details.html">{{ $cardTitle }}</a>
+            <a href=" {{ isset($linkCard) ? $linkCard : '#' }}">{{ $cardTitle }}</a>
             <i class="la la-check-circle ml-1" data-toggle="tooltip" data-placement="top" title="Claimed"></i>
         </h4>
         <p class="card-sub">

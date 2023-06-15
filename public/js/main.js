@@ -372,38 +372,61 @@ badges.forEach((badge) => {
     });
 });
 // Get the CSRF token from a meta tag in the HTML
-var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
-$(document).ready(function () {
-    // Set the CSRF token as a default header for all AJAX requests
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": csrfToken,
-        },
-    });
+// var csrfToken = document
+//     .querySelector('meta[name="csrf-token"]')
+//     .getAttribute("content");
 
-    $(document).ready(function () {
-        // Listen for change event on the select dropdown
-        $("#sort-order-select").change(function () {
-            // Get the selected option value
-            var selectedOption = $(this).val();
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Set the CSRF token as a default header for all Axios requests
+//     axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
 
-            // Send an AJAX request to the server with the selected option value
-            $.ajax({
-                url: "http://127.0.0.1:8000/listing",
-                type: "POST",
-                data: {
-                    sort_order: selectedOption,
-                },
-                success: function (response) {
-                    // Handle the server response, e.g., update the listing with the sorted data
-                    console.log(response);
-                },
-                error: function (xhr) {
-                    // Handle error, if any
-                    console.log(xhr.responseText);
-                },
-            });
-        });
-    });
-});
+//     // Listen for change event on the select dropdown
+//     document
+//         .getElementById("sort-order-select")
+//         .addEventListener("change", function () {
+//             // Get the selected option value
+//             var selectedOption = this.value;
+
+//             // Send a GET request to the server with the selected option value
+//             axios
+//                 .get("/listing/" + selectedOption)
+//                 .then(function (response) {
+//                     // Handle the server response, e.g., update the listing with the sorted data
+//                     console.log(response.data);
+//                 })
+//                 .catch(function (error) {
+//                     // Handle error, if any
+//                     console.log(error.response.data);
+//                 });
+//         });
+// });
+
+// var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+// $(document).ready(function () {
+//     // Set the CSRF token as a default header for all Axios requests
+//     axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
+
+//     // Listen for change event on the select dropdown
+//     $("#sort-order-select").change(function () {
+//         // Get the selected option value
+//         var selectedOption = $(this).val();
+
+//         // Send a GET request to the server with the selected option value
+//         axios
+//             .get("/listing/" + selectedOption)
+//             .then(function (response) {
+//                 // Handle the server response, e.g., update the listing with the sorted data
+//                 console.log(response.data);
+//             })
+//             .catch(function (error) {
+//                 // Handle error, if any
+//                 console.log(error.response.data);
+//             });
+//     });
+// });
+
+function setScoreValue(value = 0) {
+    document.getElementById("score-value").value = value;
+}

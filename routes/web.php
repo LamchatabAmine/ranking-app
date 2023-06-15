@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,8 @@ Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
-Route::post('/http://127.0.0.1:8000/listing', [BusinessController::class, 'sort'])->name('listing.sort');
+// Route::get('/listing/{sortOrder}', [BusinessController::class, 'sort'])->name('listing.sort');
+
 
 // Route::resource('business', BusinessController::class)->middleware(['auth', 'IsConsumer']);
 
@@ -39,6 +42,10 @@ Route::middleware(['auth', 'IsConsumer'])->group(function () {
 });
 
 Route::get('/business/detail/{id}', [BusinessController::class, 'show'])->name('business.detail');
+Route::post('/business/detail/{business_id}', [ReviewController::class, 'store'])
+    ->name('review.store')
+    ->middleware(['auth', 'IsConsumer']);
+
 
 
 
@@ -48,6 +55,23 @@ Route::middleware(['auth', 'IsConsumer'])->group(function () {
 
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+
+Route::middleware(['auth', 'IsManager'])->group(function () {
+    Route::get('/manage', [StaticController::class, 'manager'])->name('manage');
+    Route::post('/manage/confirm/{id}', [BusinessController::class, 'confirmChange'])->name('business.confirm');
+});
+
+Route::middleware(['auth', 'IsAdmin'])->group(function () {
+    Route::get('dashboard',  [AdminController::class, 'index'])->name('admin');
+    Route::get('listings',  [AdminController::class, 'listings'])->name('dashboardListings');
+    Route::delete('/listings/{id}', [BusinessController::class, 'destroy'])->name('listings.destroy');
+    Route::get('profile',  [AdminController::class, 'profile'])->name('profile');
+    Route::patch('/profile', [AdminController::class, 'update'])->name('profile.update');
+    Route::get('/addUser', [AdminController::class, 'addUser'])->name('addUser');
+    Route::post('/addUser', [AdminController::class, 'store'])->name('addUser.store');
+});
+
 
 
 
