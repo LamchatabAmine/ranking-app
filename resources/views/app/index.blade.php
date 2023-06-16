@@ -123,7 +123,7 @@
             </div>
             <!-- end row -->
             <div class="more-btn-box pt-3 text-center">
-                <a href="all-categories.html" class="btn-gray hover-scale-2">Browse All Category <i
+                <a href="#" class="btn-gray hover-scale-2">Browse All Category <i
                         class="la la-arrow-right ml-2"></i></a>
             </div>
         </div><!-- end container -->
@@ -441,115 +441,9 @@
 
 
 
-    {{--  TESTIMONIAL AREA --}}
-    <section class="testimonial-area section-padding text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <x-section-header>
-                        <x-slot:svg>
-                            <x-svgs.svg-seven />
-                            </x-slot>
-                            <x-slot:title>
-                                Don't Believe Us Check <br> Client's Word.
-                                </x-slot>
-                                <x-slot:desc>
-                                    Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero,<br>
-                                    a feugiat eros. Nunc ut lacinia tortors.
-                                    </x-slot>
-                    </x-section-header>
-                </div>
-            </div><!-- end row -->
-            <div class="row padding-top-60px">
-                <div class="col-lg-12">
-                    <div class="testimonial-carousel owl-trigger-action">
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Richard Doe
-                                    </x-slot>
-                                    <x-slot:country>
-                                        united states
-                                        </x-slot>
-                        </x-review-item>
-
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Denwen Evil
-                                    </x-slot>
-                                    <x-slot:country>
-                                        united kingdom
-                                        </x-slot>
-                        </x-review-item>
-
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Collis Pong
-                                    </x-slot>
-                                    <x-slot:country>
-                                        melbourne, australia
-                                        </x-slot>
-                        </x-review-item>
-
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Collis Pong
-                                    </x-slot>
-                                    <x-slot:country>
-                                        united states
-                                        </x-slot>
-                        </x-review-item>
-
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Denwen Evil
-                                    </x-slot>
-                                    <x-slot:country>
-                                        united kingdom
-                                        </x-slot>
-                        </x-review-item>
-
-                        <x-review-item>
-                            <x-slot:desc>
-                                Salvia esse nihil, flexitarian Truffaut synth art party deep v chillwave. Seitan
-                                High Life reprehenderit consectetur cupidatat kogi.
-                                </x-slot>
-                                <x-slot:name>
-                                    Collis Pong
-                                    </x-slot>
-                                    <x-slot:country>
-                                        melbourne, australia
-                                        </x-slot>
-                        </x-review-item>
-
-                    </div>
-                </div><!-- end col-lg-12 -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section>
-
     <div class="section-block"></div>
     {{--  CTA AREA --}}
-    <section class="cta-area">
+    <section class="cta-area mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

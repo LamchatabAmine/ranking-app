@@ -36,7 +36,7 @@ class SearchController extends Controller
                     $query->orderBy('title', 'desc');
                 }
             })
-            ->paginate(2); // Adjust the pagination limit as 10
+            ->paginate(6); // Adjust the pagination limit as 10
 
 
         // Retrieve all categories and cities for the filter options
@@ -44,7 +44,9 @@ class SearchController extends Controller
         $categories = Category::all();
         $cities = City::all();
         $galleries = Gallery::all();
+        $count = Business::where('isActive', 1)->count();
 
-        return view('app.listing', compact('businesses',  'categories', 'cities', 'galleries'));
+
+        return view('app.listing', compact('businesses',  'categories', 'cities', 'galleries', 'count'));
     }
 }
