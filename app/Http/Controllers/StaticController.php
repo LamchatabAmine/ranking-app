@@ -9,6 +9,7 @@ use App\Models\Review;
 use App\Models\Gallery;
 use App\Models\Business;
 use App\Models\Category;
+use App\Models\Saved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\View;
 
 class StaticController extends Controller
 {
-    public function home()
+    public function home(Request $request)
     {
         $businesses = Business::where('isActive', 1)->get();
         $categories = Category::all();
@@ -24,6 +25,7 @@ class StaticController extends Controller
         $galleries = Gallery::all();
 
         return View::make('app.index', [
+            'user' => $request->user(),
             'categories' => $categories,
             'businesses' => $businesses,
             'cities' => $cities,
@@ -47,7 +49,7 @@ class StaticController extends Controller
     {
         return view('auth.register');
     }
-    public function listing()
+    public function listing(Request $request)
     {
         $businesses = Business::where('isActive', 1)->paginate(6);
         $count = Business::where('isActive', 1)->count();
@@ -56,6 +58,7 @@ class StaticController extends Controller
         $galleries = Gallery::all();
 
         return View::make('app.listing', [
+            'user' => $request->user(),
             'categories' => $categories,
             'businesses' => $businesses,
             'count' => $count,
@@ -71,6 +74,11 @@ class StaticController extends Controller
         $galleries = Gallery::all();
         $businesses = Business::where('user_id', Auth::id())->get();
         $review = Review::all();
+        $saved = Saved::where('user_id', Auth::id())->get();
+        $allBusinesses = Business::all();
+        // $businesseSaved = Business::where('id', $saved->business_id)->get();
+
+
 
         return View::make('profile.user', [
             'user' => $request->user(),
@@ -78,6 +86,8 @@ class StaticController extends Controller
             'businesses' => $businesses,
             'galleries' => $galleries,
             'review' => $review,
+            'saved' => $saved,
+            'allBusinesses' => $allBusinesses,
         ]);
     }
 

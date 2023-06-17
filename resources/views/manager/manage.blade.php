@@ -39,21 +39,6 @@
                     <div
                         class="filter-bar d-flex flex-wrap justify-content-between align-items-center margin-bottom-30px">
                         <p class="result-text font-weight-medium">Showing 1 to 6 of {{ $count }} Listings</p>
-                        {{-- <div class="filter-bar-action d-flex flex-wrap align-items-center">
-                            <a href="#" class="search-filter" data-toggle="modal"
-                                data-target="#searchFilterModal">
-                                <i class="la la-sliders mr-1"></i>Detailed Search
-                            </a>
-                            <div class="user-chosen-select-container ml-3">
-                                <select id="sort-order-select" name="sortOrder" class="user-chosen-select">
-                                    <option value="sort-by-default">Sort by default</option>
-                                    <option value="asc" @if (request('sortOrder') == 'asc') selected @endif>
-                                        Ascending</option>
-                                    <option value="desc" @if (request('sortOrder') == 'desc') selected @endif>
-                                        Descending</option>
-                                </select>
-                            </div>
-                        </div><!-- end filter-bar-action --> --}}
                     </div><!-- end filter-bar -->
                 </div><!-- end col-lg-12 -->
                 <div class="col-lg-8">

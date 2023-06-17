@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
+
+
 class GoogleController extends Controller
 {
     public function handleGoogleRedirect()
@@ -22,6 +24,7 @@ class GoogleController extends Controller
         // try {
         $user = Socialite::driver('google')->user();
         $userExisted = User::where('google_id', $user->id)->first();
+
         if ($userExisted) {
             Auth::login($userExisted);
             return redirect()->intended('/');
@@ -35,8 +38,10 @@ class GoogleController extends Controller
             Auth::login($newUser);
             return redirect()->intended('/');
         }
-        // } catch (Exception $e) {
-        //     dd($e);
+        // } catch (\Exception $e) {
+        //     // Handle the exception, log the error, or display an error message
+        //     // For example:
+        //     return redirect()->route('login')->with('error', 'Failed to authenticate with Google.');
         // }
     }
 }

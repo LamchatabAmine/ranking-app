@@ -87,7 +87,7 @@
                                 <div class="block-card-header">
                                     <h2 class="widget-title pb-0">Profile Details</h2>
                                 </div>
-                                <form action="{{ route('profile.update') }}" method="post" class="block-card-body"
+                                <form action="{{ route('admin.update') }}" method="post" class="block-card-body"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')

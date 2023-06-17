@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
 use App\Models\Review;
+use App\Models\Saved;
 
 class BusinessController extends Controller
 {
@@ -234,5 +235,42 @@ class BusinessController extends Controller
         // You can add any additional logic or redirect the user as needed
 
         return redirect()->back()->with('success', 'Business change confirmed successfully.');
+    }
+
+
+
+
+    public function save(Request $request)
+    {
+        // Validate the request data if necessary
+        $request->validate([
+            'user_id' => 'required',
+            'business_id' => 'required',
+        ]);
+
+        $saved = new Saved();
+        $saved->user_id = $request->user_id;
+        $saved->business_id = $request->business_id;
+        // Save the business in the database
+        $saved->save();
+
+        // You can now access the user and business information through the relationships
+
+        return response()->json([
+            'message' => 'business saved successfully',
+        ]);
+    }
+
+
+    public function UnSave(Saved $saved)
+    {
+
+        // Check if the authenticated user owns the saved business
+        if ($saved->user_id === auth()->id()) {
+            $saved->delete();
+            return response()->json(['message' => 'saved business successfully deleted.']);
+        }
+
+        return response()->json(['message' => 'Unauthorized.'], 403);
     }
 }

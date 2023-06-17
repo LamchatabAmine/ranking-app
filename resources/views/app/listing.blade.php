@@ -73,23 +73,30 @@
                                             <x-slot:image_business>
                                                 {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                                 </x-slot>
-                                                <x-slot:logo>{{ $business->logo }}</x-slot>
-                                                    <x-slot:title>{{ $business->title }}</x-slot>
-                                                        <x-slot:linkAddress>{{ $business->address }}</x-slot>
-                                                            <x-slot:address>{{ $business->address }}</x-slot>
-                                                                <x-slot:rate>0</x-slot>
-                                                                    <x-slot:linkCategory>
-                                                                        #{{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
-                                                                        </x-slot>
-                                                                        <x-slot:category>
-                                                                            {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
+                                                <x-slot:save>
+                                                    <span class="bookmark-btn" data-toggle="tooltip"
+                                                        data-placement="top" title="Save"
+                                                        onclick="saveBusiness('{{ route('save') }}', {{ $user->id }}, {{ $business->id }})">
+                                                        <i class="la la-bookmark"></i>
+                                                    </span>
+                                                    </x-slot>
+                                                    <x-slot:logo>{{ $business->logo }}</x-slot>
+                                                        <x-slot:title>{{ $business->title }}</x-slot>
+                                                            <x-slot:linkAddress>{{ $business->address }}</x-slot>
+                                                                <x-slot:address>{{ $business->address }}</x-slot>
+                                                                    <x-slot:rate>0</x-slot>
+                                                                        <x-slot:linkCategory>
+                                                                            #{{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
                                                                             </x-slot>
-                                                                            <x-slot:linkWebSite>
-                                                                                {{ $business->website }}
+                                                                            <x-slot:category>
+                                                                                {{ $categories->firstWhere('id', $business->category_id)['category_name'] }}
                                                                                 </x-slot>
-                                                                                <x-slot:webSite>
+                                                                                <x-slot:linkWebSite>
                                                                                     {{ $business->website }}
                                                                                     </x-slot>
+                                                                                    <x-slot:webSite>
+                                                                                        {{ $business->website }}
+                                                                                        </x-slot>
                                     </x-card-list>
                                 </div>
                             @endforeach

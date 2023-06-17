@@ -3,9 +3,7 @@
         <a href="{{ $linkItem }}" class="d-block">
             <img src="{{ $image_business }}" class="card__img lazy" alt="image-business">
         </a>
-        <span class="bookmark-btn" data-toggle="tooltip" data-placement="top" title="Save">
-            <i class="la la-bookmark"></i>
-        </span>
+        {{ $save ?? '' }}
     </div>
     <div class="card-content">
         <a class="user-thumb d-inline-block" data-toggle="tooltip" data-placement="top">

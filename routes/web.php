@@ -26,10 +26,8 @@ Route::get('/listing', [StaticController::class, 'listing'])->name('listing-page
 Route::get('/contact', [StaticController::class, 'contact'])->name('contact-page');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
-// Route::get('/listing/{sortOrder}', [BusinessController::class, 'sort'])->name('listing.sort');
 
 
-// Route::resource('business', BusinessController::class)->middleware(['auth', 'IsConsumer']);
 
 
 Route::middleware(['auth', 'IsConsumer'])->group(function () {
@@ -39,6 +37,8 @@ Route::middleware(['auth', 'IsConsumer'])->group(function () {
     Route::patch('/business/{business}', [BusinessController::class, 'update'])->name('business.update');
     Route::get('/business/{id}/remove', [BusinessController::class, 'removeImage'])->name('business.removeImage');
     Route::delete('/business/{id}', [BusinessController::class, 'destroy'])->name('business.destroy');
+    Route::post('/save', [BusinessController::class, 'save'])->name('save');
+    Route::delete('/saved/{saved}', [BusinessController::class, 'UnSave'])->name('saved.destroy');
 });
 
 Route::get('/business/detail/{id}', [BusinessController::class, 'show'])->name('business.detail');
@@ -66,8 +66,8 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('dashboard',  [AdminController::class, 'index'])->name('admin');
     Route::get('listings',  [AdminController::class, 'listings'])->name('dashboardListings');
     Route::delete('/listings/{id}', [BusinessController::class, 'destroy'])->name('listings.destroy');
-    Route::get('profile',  [AdminController::class, 'profile'])->name('profile');
-    Route::patch('/profile', [AdminController::class, 'update'])->name('profile.update');
+    Route::get('/admin',  [AdminController::class, 'profile'])->name('profile');
+    Route::patch('/admin', [AdminController::class, 'update'])->name('admin.update');
     Route::get('/addUser', [AdminController::class, 'addUser'])->name('addUser');
     Route::post('/addUser', [AdminController::class, 'store'])->name('addUser.store');
 });

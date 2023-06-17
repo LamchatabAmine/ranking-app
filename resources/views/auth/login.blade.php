@@ -82,10 +82,6 @@
                                 <i class="fab fa-google "></i>
                                 Sign in with google
                             </a>
-                            <a class=" btn-lg btn-block  btn-facebook" href="#fb"><i
-                                    class="fab fa-facebook-f "></i>Sign
-                                in with facebook
-                            </a>
                         </div>
                     </div>
                 </div>

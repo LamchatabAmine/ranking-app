@@ -14,8 +14,7 @@
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="error-content text-center">
-                        <img src="images/img-loading.html" data-src="images/404-img.png" alt="error-image"
-                            class="w-100 lazy">
+                        <img src="{{ url('images/404-img.png') }}" alt="error-image" class="w-100 lazy">
                         <div class="section-heading padding-top-30px">
                             <h3 class="sec__title">Oops! That page can’t be found.</h3>
                             <p class="sec__desc">

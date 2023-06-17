@@ -3,6 +3,10 @@
         <a href="{{ isset($linkBusiness) ? $linkBusiness : '#' }}" class="d-block">
             <img src="{{ $imageName }}" class="card__img lazy" alt="card-item">
         </a>
+        {{ $save ?? '' }}
+        {{-- <span class="bookmark-btn" data-toggle="tooltip" data-placement="top" title="Save">
+            <i class="la la-bookmark"></i>
+        </span> --}}
     </div>
     <div class="card-content">
         <a href="{{ isset($linkUser) ? $linkUser : '#' }}" class="user-thumb d-inline-block" data-toggle="tooltip"

@@ -162,6 +162,13 @@
                                     <x-slot:imageName>
                                         {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                         </x-slot>
+                                        {{-- <x-slot:save>
+                                            <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
+                                                title="Save"
+                                                onclick="saveBusiness('{{ route('save') }}', {{ $user->id }}, {{ $business->id }})">
+                                                <i class="la la-bookmark"></i>
+                                            </span>
+                                            </x-slot> --}}
                                         <x-slot:linkUser>
                                             #linkUser
                                             </x-slot>
@@ -302,6 +309,13 @@
                                         <x-slot:imageName>
                                             {{ $galleries->where('business_id', $business->id)->where('type', 1)->pluck('path')->first() }}
                                             </x-slot>
+                                            {{-- <x-slot:save>
+                                                <span class="bookmark-btn" data-toggle="tooltip" data-placement="top"
+                                                    title="Save"
+                                                    onclick="saveRecord('{{ route('save') }}', {{ $user->id }}, {{ $business->id }})">
+                                                    <i class="la la-bookmark"></i>
+                                                </span>
+                                                </x-slot> --}}
                                             <x-slot:linkUser>
                                                 #linkUser
                                                 </x-slot>

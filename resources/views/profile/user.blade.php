@@ -1,3 +1,30 @@
+{{-- @dd($allBusinesses) --}}
+
+{{-- @foreach ($saved as $save)
+    @php
+        $businesseSaved = $allBusinesses->where('id', $save->business_id);
+    @endphp
+
+    @dd($businesseSaved)
+@endforeach --}}
+
+
+@if ($businesses->isNotEmpty())
+    @foreach ($businesses as $business)
+        @php
+            $reviews = $review->where('business_id', $business->id);
+            $count = $review->where('business_id', $business->id)->count();
+        @endphp
+    @endforeach
+@endif
+
+
+
+
+
+
+
+
 <x-app-layout>
     <x-header />
     {{-- <!--  per-loader --> --}}
@@ -27,17 +54,19 @@
                             </div>
                         </div>
                         <div class="btn-box bread-btns d-flex align-items-center pb-3">
-                            <span class="btn-gray mr-2"><i class="la la-file-text-o mr-1"></i><span
-                                    class="text-color font-weight-semi-bold mr-1">12</span>Places</span>
+                            <span class="btn-gray mr-2">
+                                <i class="lar la-bookmark"></i>
+                                <span class="text-color font-weight-semi-bold mr-1">{{ $saved->count() }}</span>
+                                Saved
+                            </span>
                             <span class="btn-gray mr-2"><i class="la la-star-o mr-1"></i><span
-                                    class="text-color font-weight-semi-bold mr-1">34</span>Reviews</span>
+                                    class="text-color font-weight-semi-bold mr-1">{{ isset($count) ? $count : 0 }}</span>Reviews</span>
                             <a href="{{ route('profile.edit') }}">
                                 <button
                                     class="btn-gray mr-2 gradient-btn shadow-none add-listing-btn-hide d-flex align-items-center">
                                     Edit Profile<iconify-icon icon="uil:edit" style="color: white;margin-left: 5px;">
                                     </iconify-icon>
                                 </button>
-
                             </a>
                         </div>
                     </div><!-- end breadcrumb-content -->
@@ -125,26 +154,88 @@
                                 </p>
                             @endif
                         </div><!-- end row -->
+
+                        <div class="">
+                            <div class="section-heading pb-1">
+                                <h2 class="sec__title font-size-24 line-height-30">Saved
+                                    <i class="las la-bookmark"></i><span class="ml-1 text-color-2"></span>
+                                </h2>
+                            </div><!-- end section-heading -->
+                            <div class="row">
+                                @if ($saved->isNotEmpty())
+                                    @foreach ($saved as $save)
+                                        @php
+                                            $businesseSaved = $allBusinesses->where('id', $save->business_id)->first();
+                                        @endphp
+                                        <div id="saveItem_{{ $save->id }}" class="col-lg-6 responsive-column">
+                                            <x-card-item>
+                                                <x-slot:linkBusiness>
+                                                    {{ route('business.detail', $businesseSaved->id) }}
+                                                    </x-slot>
+                                                    <x-slot:imageName>
+                                                        {{ $galleries->where('business_id', $businesseSaved->id)->where('type', 1)->pluck('path')->first() }}
+                                                        </x-slot>
+                                                        <x-slot:save>
+                                                            <span class="bookmark-btn" data-toggle="tooltip"
+                                                                data-placement="top" title="Unsave"
+                                                                onclick="unsaveBusiness('{{ route('saved.destroy', $save->id) }}', {{ $save->id }})">
+                                                                <i class="la la-bookmark"></i>
+                                                            </span>
+                                                            </x-slot>
+                                                            <x-slot:linkUser>
+                                                                #linkUser
+                                                                </x-slot>
+                                                                <x-slot:businessLogo>
+                                                                    {{ $businesseSaved->logo }}
+                                                                    </x-slot>
+                                                                    <x-slot:cardTitle>
+                                                                        {{ $businesseSaved->title }}
+                                                                        </x-slot>
+                                                                        <x-slot:cardSub>
+                                                                            {{ $businesseSaved->address }}
+                                                                            </x-slot>
+                                                                            <x-slot:rate>
+                                                                                4.7
+                                                                                </x-slot>
+                                                                                <x-slot:review>
+                                                                                    5
+                                                                                    </x-slot>
+                                                                                    <x-slot:category>
+                                                                                        {{ $categories->firstWhere('id', $businesseSaved->category_id)['category_name'] }}
+                                                                                        </x-slot>
+                                                                                        <x-slot:linkWeb>
+                                                                                            {{ $businesseSaved->website }}
+                                                                                            </x-slot>
+                                            </x-card-item>
+                                        </div>
+                                    @endforeach
+                                @else
+                                @endif
+                            </div>
+                        </div><!-- end user-reviews -->
+
+
+
                         <div class="user-reviews">
+                            <div class="section-heading pb-1">
+                                <h2 class="sec__title font-size-24 line-height-30">
+                                    Reviews
+                                </h2>
+                            </div><!-- end section-heading -->
                             @if ($businesses->isNotEmpty())
-                                @foreach ($businesses as $business)
+                                {{-- @foreach ($businesses as $business)
                                     @php
                                         $reviews = $review->where('business_id', $business->id);
                                         $count = $review->where('business_id', $business->id)->count();
                                     @endphp
-                                @endforeach
-
-                                <div class="section-heading pb-1">
-                                    <h2 class="sec__title font-size-24 line-height-30">Reviews <span
-                                            class="ml-1 text-color-2">({{ $count }})</span></h2>
-                                </div><!-- end section-heading -->
+                                @endforeach --}}
                                 <div class="comments-list reviews-list">
                                     @if ($reviews->isEmpty())
                                         <p>There is no reviews in your businesses</p>
                                     @else
                                         @foreach ($reviews as $review)
                                             @php
-                                                $user = $users->where('id', $review->user_id)->first();
+                                                $user = $user->where('id', $review->user_id)->first();
                                             @endphp
                                             <div class="comment">
                                                 <div class="comment-body">
@@ -211,14 +302,18 @@
                                         href="#">www.techydevs.com</a></li>
                             </ul>
                             <ul class="social-profile social-profile-colored border-top border-top-color py-4 mt-4">
-                                <li><a href="#" class="facebook-bg"><i class="lab la-facebook-f"></i></a></li>
+                                <li><a href="#" class="facebook-bg"><i class="lab la-facebook-f"></i></a>
+                                </li>
                                 <li><a href="#" class="twitter-bg"><i class="lab la-twitter"></i></a></li>
-                                <li><a href="#" class="instagram-bg"><i class="lab la-instagram"></i></a></li>
+                                <li><a href="#" class="instagram-bg"><i class="lab la-instagram"></i></a>
+                                </li>
                                 <li><a href="#" class="behance-bg"><i class="lab la-behance"></i></a></li>
-                                <li><a href="#" class="dribbble-bg"><i class="lab la-dribbble"></i></a></li>
+                                <li><a href="#" class="dribbble-bg"><i class="lab la-dribbble"></i></a>
+                                </li>
                             </ul>
                             <a href="#" class="btn-gray" data-toggle="modal"
-                                data-target="#sendMessageModal"><i class="la la-envelope mr-1"></i> Send Message</a>
+                                data-target="#sendMessageModal"><i class="la la-envelope mr-1"></i> Send
+                                Message</a>
                         </div><!-- end sidebar-widget -->
                         <div class="sidebar-widget">
                             <h3 class="widget-title">Get in Touch</h3>

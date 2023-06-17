@@ -159,7 +159,7 @@
                                         <div class="col-lg-12">
                                             <div class="btn-box pt-1">
                                                 <button type="submit" class="theme-btn gradient-btn border-0">Save
-                                                    Changes<i class="la la-arrow-right ml-2"></i></button>
+                                                    <i class="la la-arrow-right ml-2"></i></button>
                                             </div>
                                         </div><!-- end col-lg-12 -->
                                     </div>

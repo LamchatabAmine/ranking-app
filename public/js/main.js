@@ -402,30 +402,60 @@ badges.forEach((badge) => {
 //         });
 // });
 
-// var csrfToken = $('meta[name="csrf-token"]').attr("content");
+function saveBusiness(routeUrl, user_id, business_id) {
+    // Retrieve the CSRF token from the meta tag
+    var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
-// $(document).ready(function () {
-//     // Set the CSRF token as a default header for all Axios requests
-//     axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
+    // Make an AJAX call to the save route
+    $.ajax({
+        type: "POST",
+        url: routeUrl,
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        data: {
+            user_id: user_id,
+            business_id: business_id,
+        },
+        success: function (response) {
+            // Handle the success response here
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            // Handle the error response here
+            console.log(xhr.responseText);
+        },
+    });
+}
 
-//     // Listen for change event on the select dropdown
-//     $("#sort-order-select").change(function () {
-//         // Get the selected option value
-//         var selectedOption = $(this).val();
+function unsaveBusiness(routeUrl, saveId) {
+    // Get the CSRF token value from the meta tag
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
 
-//         // Send a GET request to the server with the selected option value
-//         axios
-//             .get("/listing/" + selectedOption)
-//             .then(function (response) {
-//                 // Handle the server response, e.g., update the listing with the sorted data
-//                 console.log(response.data);
-//             })
-//             .catch(function (error) {
-//                 // Handle error, if any
-//                 console.log(error.response.data);
-//             });
-//     });
-// });
+    // Make an AJAX call to the delete route
+    $.ajax({
+        type: "DELETE",
+        url: routeUrl,
+        headers: {
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        data: {
+            _token: csrfToken,
+        },
+        success: function (response) {
+            // Handle the success response here
+            console.log(response);
+            // Remove the corresponding element from the Blade view
+            $("#saveItem_" + saveId).remove();
+        },
+        error: function (xhr, status, error) {
+            // Handle the error response here
+            console.log(xhr.responseText);
+        },
+    });
+}
 
 function setScoreValue(value = 0) {
     document.getElementById("score-value").value = value;
