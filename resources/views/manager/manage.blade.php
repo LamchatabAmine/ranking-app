@@ -16,11 +16,11 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between">
                         <div class="section-heading">
-                            <h2 class="sec__title text-white font-size-40 mb-0">Profile edit</h2>
+                            <h2 class="sec__title text-white font-size-40 mb-0">Manage the businesses</h2>
                         </div>
                         <ul class="list-items bread-list ">
                             <li><a href="{{ route('home-page') }}">Home</a></li>
-                            <li>manage</li>
+                            <li>Manage</li>
                         </ul>
                     </div><!-- end breadcrumb-content -->
                 </div><!-- end col-lg-12 -->
